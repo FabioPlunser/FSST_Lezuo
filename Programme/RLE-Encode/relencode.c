@@ -8,22 +8,34 @@
 char* encode(char* str)
 {
     char* string = str;
-    char* output = malloc(MAX_RLEN);
-    char* output_value = malloc(MAX_RLEN);
+    int count=1;
+    char *output;
+    char character = '0';
 
     int j, i;
 
-    for (i = 0; *string != '\0'; i++)
+    printf("\n%s\n",str);
+
+    for (i = 0; i<=strlen(string)-1; i++)
     {
-        *(output+i) = *string;
-        for(j = i; j<=strlen(string)-1; j++) 
+        character = string[i];
+        // printf("%c", character);
+        for(j = i+1; j<=strlen(string); j++) 
         {
-            if(*string == *(output+i))
+            
+            if(string[j] == character)
             {
-                string++;
-            } 
+                count++;
+                i++;
+            }else
+            {
+                sprintf(output, "%c %i\n", character, count);
+                count=1;
+                break;
+            }
+             
         }    
-        printf("%c %i", string[i], j);
+        
     }
     
     return output;
