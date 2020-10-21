@@ -520,32 +520,32 @@ RLEV2/fast:
 	$(MAKE) -f CMakeFiles/RLEV2.dir/build.make CMakeFiles/RLEV2.dir/build
 .PHONY : RLEV2/fast
 
-src/old_rle_encode.o: src/old_rle_encode.c.o
+src/RLE-Encode-V2.o: src/RLE-Encode-V2.c.o
 
-.PHONY : src/old_rle_encode.o
+.PHONY : src/RLE-Encode-V2.o
 
 # target to build an object file
-src/old_rle_encode.c.o:
-	$(MAKE) -f CMakeFiles/RLEV2.dir/build.make CMakeFiles/RLEV2.dir/src/old_rle_encode.c.o
-.PHONY : src/old_rle_encode.c.o
+src/RLE-Encode-V2.c.o:
+	$(MAKE) -f CMakeFiles/RLEV2.dir/build.make CMakeFiles/RLEV2.dir/src/RLE-Encode-V2.c.o
+.PHONY : src/RLE-Encode-V2.c.o
 
-src/old_rle_encode.i: src/old_rle_encode.c.i
+src/RLE-Encode-V2.i: src/RLE-Encode-V2.c.i
 
-.PHONY : src/old_rle_encode.i
+.PHONY : src/RLE-Encode-V2.i
 
 # target to preprocess a source file
-src/old_rle_encode.c.i:
-	$(MAKE) -f CMakeFiles/RLEV2.dir/build.make CMakeFiles/RLEV2.dir/src/old_rle_encode.c.i
-.PHONY : src/old_rle_encode.c.i
+src/RLE-Encode-V2.c.i:
+	$(MAKE) -f CMakeFiles/RLEV2.dir/build.make CMakeFiles/RLEV2.dir/src/RLE-Encode-V2.c.i
+.PHONY : src/RLE-Encode-V2.c.i
 
-src/old_rle_encode.s: src/old_rle_encode.c.s
+src/RLE-Encode-V2.s: src/RLE-Encode-V2.c.s
 
-.PHONY : src/old_rle_encode.s
+.PHONY : src/RLE-Encode-V2.s
 
 # target to generate assembly for a file
-src/old_rle_encode.c.s:
-	$(MAKE) -f CMakeFiles/RLEV2.dir/build.make CMakeFiles/RLEV2.dir/src/old_rle_encode.c.s
-.PHONY : src/old_rle_encode.c.s
+src/RLE-Encode-V2.c.s:
+	$(MAKE) -f CMakeFiles/RLEV2.dir/build.make CMakeFiles/RLEV2.dir/src/RLE-Encode-V2.c.s
+.PHONY : src/RLE-Encode-V2.c.s
 
 # Help Target
 help:
@@ -587,9 +587,9 @@ help:
 	@echo "... ContinuousTest"
 	@echo "... ContinuousSubmit"
 	@echo "... RLEV2"
-	@echo "... src/old_rle_encode.o"
-	@echo "... src/old_rle_encode.i"
-	@echo "... src/old_rle_encode.s"
+	@echo "... src/RLE-Encode-V2.o"
+	@echo "... src/RLE-Encode-V2.i"
+	@echo "... src/RLE-Encode-V2.s"
 .PHONY : help
 
 

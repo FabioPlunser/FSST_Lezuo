@@ -1,6 +1,8 @@
 // Author: FabioPlunser //
 // Date: 21.10.2020 //
 // GIT-Repo: https://github.com/FabioPlunser/FSST_Lezuo
+// Compiled with Cmake, in WSL using Ubuntu 20.0.4, as you can see in my Repo //
+
 // RLE-Encode//
 
 //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
@@ -12,28 +14,28 @@
 
 char* encode(char* str){
     
-    char* string = str;
-    int istrlen = strlen(string);
-    char* output = malloc(MAX_RLEN);
+    char* string = str; 
+    char* output = malloc(MAX_RLEN);  //memory allocation
     char* count = malloc(MAX_RLEN);
 
     int j, i, x = 0;
 
     for(i=0; *string != '\0'; i++){    
         
-        *(output+i) = *string;
-        for(j=0; *string == *(output+i); j++){
-            string++;
+        *(output+i) = *string; //get first value of pointer string
+        for(j=0; *string == *(output+i); j++){ // if value of string pointer is the same as output value go to next address
+            string++;   //go to the next address --> next value of pointer string
         }
-        sprintf(count, "%i", j);
-        //*(output+(++i)) = *count;
+        sprintf(count, "%i", j); // write how often it counted till string == output+1 ==== False
+        
+        //*(output+(++i)) = *count; // At first i had this solution, but it only works with 1 digit numbers
 
-        for (x =0; x<strlen(count); x++){
-            *(output+(++i)) = *(count+x);
+        for (x =0; x<strlen(count); x++){ 
+            *(output+(++i)) = *(count+x); // for values with more than 1 digit, 
         }
     }
-    free(count);
-    *(output+(++i)) == '\0';
+    free(count); //deallocate count in memory
+    *(output+(++i)) == '\0'; //add EOS 
     
     return output;
 }
