@@ -19,7 +19,7 @@ char* encode(char* str)
     for (i = 0; i<=strlen(string)-1; i++)
     {
         character = string[i];
-        // printf("%c", character);
+        
         for(j = i+1; j<=strlen(string); j++) 
         {
             
@@ -33,11 +33,8 @@ char* encode(char* str)
                 count=1;
                 break;
             }
-             
         }    
-        
-    }
-    
+    }    
     return output;
     
 }
