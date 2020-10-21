@@ -1,1 +1,1 @@
-/bin/c++    -rdynamic CMakeFiles/RLEV1.dir/main.cpp.o  -o RLEV1 
+/bin/gcc-9 -g  -rdynamic CMakeFiles/RLEV1.dir/src/main.c.o  -o RLEV1 

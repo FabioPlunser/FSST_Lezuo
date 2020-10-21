@@ -520,32 +520,32 @@ RLEV1/fast:
 	$(MAKE) -f CMakeFiles/RLEV1.dir/build.make CMakeFiles/RLEV1.dir/build
 .PHONY : RLEV1/fast
 
-main.o: main.cpp.o
+src/main.o: src/main.c.o
 
-.PHONY : main.o
+.PHONY : src/main.o
 
 # target to build an object file
-main.cpp.o:
-	$(MAKE) -f CMakeFiles/RLEV1.dir/build.make CMakeFiles/RLEV1.dir/main.cpp.o
-.PHONY : main.cpp.o
+src/main.c.o:
+	$(MAKE) -f CMakeFiles/RLEV1.dir/build.make CMakeFiles/RLEV1.dir/src/main.c.o
+.PHONY : src/main.c.o
 
-main.i: main.cpp.i
+src/main.i: src/main.c.i
 
-.PHONY : main.i
+.PHONY : src/main.i
 
 # target to preprocess a source file
-main.cpp.i:
-	$(MAKE) -f CMakeFiles/RLEV1.dir/build.make CMakeFiles/RLEV1.dir/main.cpp.i
-.PHONY : main.cpp.i
+src/main.c.i:
+	$(MAKE) -f CMakeFiles/RLEV1.dir/build.make CMakeFiles/RLEV1.dir/src/main.c.i
+.PHONY : src/main.c.i
 
-main.s: main.cpp.s
+src/main.s: src/main.c.s
 
-.PHONY : main.s
+.PHONY : src/main.s
 
 # target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) -f CMakeFiles/RLEV1.dir/build.make CMakeFiles/RLEV1.dir/main.cpp.s
-.PHONY : main.cpp.s
+src/main.c.s:
+	$(MAKE) -f CMakeFiles/RLEV1.dir/build.make CMakeFiles/RLEV1.dir/src/main.c.s
+.PHONY : src/main.c.s
 
 # Help Target
 help:
@@ -587,9 +587,9 @@ help:
 	@echo "... ContinuousTest"
 	@echo "... ContinuousSubmit"
 	@echo "... RLEV1"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
+	@echo "... src/main.o"
+	@echo "... src/main.i"
+	@echo "... src/main.s"
 .PHONY : help
 
 

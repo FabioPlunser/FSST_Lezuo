@@ -22,7 +22,6 @@ char* encode(char* str)
         
         for(j = i+1; j<=strlen(string); j++) 
         {
-            
             if(string[j] == character)
             {
                 count++;
