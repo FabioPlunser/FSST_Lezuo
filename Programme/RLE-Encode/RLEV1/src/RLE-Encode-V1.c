@@ -9,7 +9,7 @@ char* encode(char* str)
 {
     char* string = str;
     int count=1;
-    char *output;
+    char *output = malloc(MAX_RLEN);
     char character = '0';
 
     int j, i;
@@ -22,7 +22,6 @@ char* encode(char* str)
         
         for(j = i+1; j<=strlen(string); j++) 
         {
-            
             if(string[j] == character)
             {
                 count++;
