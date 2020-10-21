@@ -520,32 +520,32 @@ RLEV1/fast:
 	$(MAKE) -f CMakeFiles/RLEV1.dir/build.make CMakeFiles/RLEV1.dir/build
 .PHONY : RLEV1/fast
 
-src/main.o: src/main.c.o
+src/RLE-Encode-V1.o: src/RLE-Encode-V1.c.o
 
-.PHONY : src/main.o
+.PHONY : src/RLE-Encode-V1.o
 
 # target to build an object file
-src/main.c.o:
-	$(MAKE) -f CMakeFiles/RLEV1.dir/build.make CMakeFiles/RLEV1.dir/src/main.c.o
-.PHONY : src/main.c.o
+src/RLE-Encode-V1.c.o:
+	$(MAKE) -f CMakeFiles/RLEV1.dir/build.make CMakeFiles/RLEV1.dir/src/RLE-Encode-V1.c.o
+.PHONY : src/RLE-Encode-V1.c.o
 
-src/main.i: src/main.c.i
+src/RLE-Encode-V1.i: src/RLE-Encode-V1.c.i
 
-.PHONY : src/main.i
+.PHONY : src/RLE-Encode-V1.i
 
 # target to preprocess a source file
-src/main.c.i:
-	$(MAKE) -f CMakeFiles/RLEV1.dir/build.make CMakeFiles/RLEV1.dir/src/main.c.i
-.PHONY : src/main.c.i
+src/RLE-Encode-V1.c.i:
+	$(MAKE) -f CMakeFiles/RLEV1.dir/build.make CMakeFiles/RLEV1.dir/src/RLE-Encode-V1.c.i
+.PHONY : src/RLE-Encode-V1.c.i
 
-src/main.s: src/main.c.s
+src/RLE-Encode-V1.s: src/RLE-Encode-V1.c.s
 
-.PHONY : src/main.s
+.PHONY : src/RLE-Encode-V1.s
 
 # target to generate assembly for a file
-src/main.c.s:
-	$(MAKE) -f CMakeFiles/RLEV1.dir/build.make CMakeFiles/RLEV1.dir/src/main.c.s
-.PHONY : src/main.c.s
+src/RLE-Encode-V1.c.s:
+	$(MAKE) -f CMakeFiles/RLEV1.dir/build.make CMakeFiles/RLEV1.dir/src/RLE-Encode-V1.c.s
+.PHONY : src/RLE-Encode-V1.c.s
 
 # Help Target
 help:
@@ -587,9 +587,9 @@ help:
 	@echo "... ContinuousTest"
 	@echo "... ContinuousSubmit"
 	@echo "... RLEV1"
-	@echo "... src/main.o"
-	@echo "... src/main.i"
-	@echo "... src/main.s"
+	@echo "... src/RLE-Encode-V1.o"
+	@echo "... src/RLE-Encode-V1.i"
+	@echo "... src/RLE-Encode-V1.s"
 .PHONY : help
 
 

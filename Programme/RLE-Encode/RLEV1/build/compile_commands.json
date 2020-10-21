@@ -1,7 +1,7 @@
 [
 {
   "directory": "/home/peppi/FSST_Lezuo/Programme/RLE-Encode/RLEV1/build",
-  "command": "/bin/gcc-9   -g   -o CMakeFiles/RLEV1.dir/src/main.c.o   -c /home/peppi/FSST_Lezuo/Programme/RLE-Encode/RLEV1/src/main.c",
-  "file": "/home/peppi/FSST_Lezuo/Programme/RLE-Encode/RLEV1/src/main.c"
+  "command": "/bin/gcc-9   -g   -o CMakeFiles/RLEV1.dir/src/RLE-Encode-V1.c.o   -c /home/peppi/FSST_Lezuo/Programme/RLE-Encode/RLEV1/src/RLE-Encode-V1.c",
+  "file": "/home/peppi/FSST_Lezuo/Programme/RLE-Encode/RLEV1/src/RLE-Encode-V1.c"
 }
 ]

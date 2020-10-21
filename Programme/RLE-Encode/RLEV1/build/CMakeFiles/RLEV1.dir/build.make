@@ -57,27 +57,27 @@ include CMakeFiles/RLEV1.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/RLEV1.dir/flags.make
 
-CMakeFiles/RLEV1.dir/src/main.c.o: CMakeFiles/RLEV1.dir/flags.make
-CMakeFiles/RLEV1.dir/src/main.c.o: ../src/main.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/peppi/FSST_Lezuo/Programme/RLE-Encode/RLEV1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/RLEV1.dir/src/main.c.o"
-	/bin/gcc-9 $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/RLEV1.dir/src/main.c.o   -c /home/peppi/FSST_Lezuo/Programme/RLE-Encode/RLEV1/src/main.c
+CMakeFiles/RLEV1.dir/src/RLE-Encode-V1.c.o: CMakeFiles/RLEV1.dir/flags.make
+CMakeFiles/RLEV1.dir/src/RLE-Encode-V1.c.o: ../src/RLE-Encode-V1.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/peppi/FSST_Lezuo/Programme/RLE-Encode/RLEV1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/RLEV1.dir/src/RLE-Encode-V1.c.o"
+	/bin/gcc-9 $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/RLEV1.dir/src/RLE-Encode-V1.c.o   -c /home/peppi/FSST_Lezuo/Programme/RLE-Encode/RLEV1/src/RLE-Encode-V1.c
 
-CMakeFiles/RLEV1.dir/src/main.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/RLEV1.dir/src/main.c.i"
-	/bin/gcc-9 $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/peppi/FSST_Lezuo/Programme/RLE-Encode/RLEV1/src/main.c > CMakeFiles/RLEV1.dir/src/main.c.i
+CMakeFiles/RLEV1.dir/src/RLE-Encode-V1.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/RLEV1.dir/src/RLE-Encode-V1.c.i"
+	/bin/gcc-9 $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/peppi/FSST_Lezuo/Programme/RLE-Encode/RLEV1/src/RLE-Encode-V1.c > CMakeFiles/RLEV1.dir/src/RLE-Encode-V1.c.i
 
-CMakeFiles/RLEV1.dir/src/main.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/RLEV1.dir/src/main.c.s"
-	/bin/gcc-9 $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/peppi/FSST_Lezuo/Programme/RLE-Encode/RLEV1/src/main.c -o CMakeFiles/RLEV1.dir/src/main.c.s
+CMakeFiles/RLEV1.dir/src/RLE-Encode-V1.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/RLEV1.dir/src/RLE-Encode-V1.c.s"
+	/bin/gcc-9 $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/peppi/FSST_Lezuo/Programme/RLE-Encode/RLEV1/src/RLE-Encode-V1.c -o CMakeFiles/RLEV1.dir/src/RLE-Encode-V1.c.s
 
 # Object files for target RLEV1
 RLEV1_OBJECTS = \
-"CMakeFiles/RLEV1.dir/src/main.c.o"
+"CMakeFiles/RLEV1.dir/src/RLE-Encode-V1.c.o"
 
 # External object files for target RLEV1
 RLEV1_EXTERNAL_OBJECTS =
 
-RLEV1: CMakeFiles/RLEV1.dir/src/main.c.o
+RLEV1: CMakeFiles/RLEV1.dir/src/RLE-Encode-V1.c.o
 RLEV1: CMakeFiles/RLEV1.dir/build.make
 RLEV1: CMakeFiles/RLEV1.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/peppi/FSST_Lezuo/Programme/RLE-Encode/RLEV1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking C executable RLEV1"

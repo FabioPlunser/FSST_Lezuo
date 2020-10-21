@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/RLEV1.dir/src/main.c.o"
+  "CMakeFiles/RLEV1.dir/src/RLE-Encode-V1.c.o"
   "RLEV1"
   "RLEV1.pdb"
 )
