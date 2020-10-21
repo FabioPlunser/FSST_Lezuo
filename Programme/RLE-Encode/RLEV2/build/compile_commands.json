@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/home/peppi/FSST_Lezuo/Programme/RLE-Encode/RLEV2/build",
+  "command": "/bin/gcc-9   -g   -o CMakeFiles/RLEV2.dir/src/old_rle_encode.c.o   -c /home/peppi/FSST_Lezuo/Programme/RLE-Encode/RLEV2/src/old_rle_encode.c",
+  "file": "/home/peppi/FSST_Lezuo/Programme/RLE-Encode/RLEV2/src/old_rle_encode.c"
+}
+]
