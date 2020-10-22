@@ -1,0 +1,1 @@
+/bin/gcc-9 -g  -rdynamic CMakeFiles/Copy_with_POSIX.dir/src/copy_with_POSIX.c.o  -o Copy_with_POSIX 
