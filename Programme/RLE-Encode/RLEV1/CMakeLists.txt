@@ -6,6 +6,7 @@ enable_testing()
 
 add_executable(RLEV1 src/RLE-Encode-V1.c)
 # add_executable(RLEV1 src/main.c)
+# add_executable(RLEV1 src/rle_encode.c)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})

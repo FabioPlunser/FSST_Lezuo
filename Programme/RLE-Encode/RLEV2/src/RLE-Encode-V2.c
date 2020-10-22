@@ -14,17 +14,17 @@
 
 char* encode(char* str){
     
-    char* string = str; 
+    
     char* output = malloc(MAX_RLEN);  //memory allocation
     char* count = malloc(MAX_RLEN);
 
     int j, i, x = 0;
 
-    for(i=0; *string != '\0'; i++){    
+    for(i=0; *str != '\0'; i++){    
         
-        *(output+i) = *string; //get first value of pointer string
-        for(j=0; *string == *(output+i); j++){ // if value of string pointer is the same as output value go to next address
-            string++;   //go to the next address --> next value of pointer string
+        *(output+i) = *str; //get first value of pointer string
+        for(j=0; *str == *(output+i); j++){ // if value of string pointer is the same as output value go to next address
+            str++;   //go to the next address --> next value of pointer string
         }
         sprintf(count, "%i", j); // write how often it counted till string == output+1 ==== False
         
