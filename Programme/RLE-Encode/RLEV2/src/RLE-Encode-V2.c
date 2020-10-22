@@ -33,7 +33,7 @@ char* encode(char* str){
         //*(output+(++i)) = *count; // At first i had this solution, but it only works with 1 digit numbers
 
         for (x =0; x<strlen(count); x++){ 
-            *(output+(++i)) = *(count+x); // for values with more than 1 digit, 
+            *(output+(++i)) = *(count+x); // for values with more than 1 digit because 2nd digit is in third address, 
         }
     }
     free(count); //deallocate count in memory
