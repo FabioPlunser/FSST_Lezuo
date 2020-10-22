@@ -1,11 +1,13 @@
 // Author: FabioPlunser //
 // Date: 21.10.2020 //
 // GIT-Repo: https://github.com/FabioPlunser/FSST_Lezuo
+// Specifig Git-location: https://github.com/FabioPlunser/FSST_Lezuo/blob/main/Programme/RLE-Encode/RLEV2/src/RLE-Encode-V2.c//
 // Compiled with Cmake, in WSL using Ubuntu 20.0.4, as you can see in my Repo //
 
-// RLE-Encode//
+// RLE-Encode Version2//
 
 //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
