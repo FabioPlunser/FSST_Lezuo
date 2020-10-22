@@ -37,8 +37,6 @@ char* encode(char* str){
         }
     }
     free(count); //deallocate count in memory
-    *(output+(++i)) == '\0'; //add EOS 
-    
     return output;
 }
 
@@ -51,13 +49,15 @@ int main(int argc, char **argv){
             break;
         }
         
-        str[MAX_RLEN] = 0; 
-        str[strlen(str)-1] = 0;
+        str[MAX_RLEN] = 0;      //don't really know how this works, shouldn't do anything because of wron syntax? But can compile char array[100] = {0};
+                                //doesn't make sens to set all values to zero after getting the string if fgets 
+        str[strlen(str)-1] = 0; //neded to ensure the correct size of string, strlen returns 
+                                //real string length + 1 because the nul terminator gets registered as a chrakter
 
         char* res= encode(str);
 
         printf("Output>: %s\n", res);
-        free(res);
+        // free(res);  does not get allocated so no point of delacoation
     }
     while (strlen(str)>1);
     

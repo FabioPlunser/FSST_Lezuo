@@ -17,41 +17,38 @@
 
 char* encode(char* str)
 {
-    char* output = malloc(MAX_RLEN);
+    char* output = malloc(MAX_RLEN); //memory allocation
     char* temp = malloc(MAX_RLEN);
     char character = '0';
     int j, i, z = 0;
     int icount = 1;
 
-    for (i = 0; i<=strlen(str)-1; i++)
+    for (i = 0; i<=strlen(str)-1; i++) 
     {
-        character = str[i];
+        character = str[i]; //get each chracter of the string at once
 
         for(j = i+1; j<=strlen(str); j++) 
         {
-            if(str[j] == character)
-            {
+            if(str[j] == character) //Checks how often one specific charakter is in the string        {
                 icount++;
                 i++;
             
             }else
             {
-                sprintf(temp, "%c%i", character, icount);
+                sprintf(temp, "%c%i", character, icount); //for outputting, put results in char*
                 
-                *(output+(z++)) = *(temp);
-                *(output+(z++)) = *(temp+1);
+                *(output+(z++)) = *(temp); //charakter to output
+                *(output+(z++)) = *(temp+1); //count to output
                 
-                if (icount >= 10 ){
+                if (icount >= 10 ){ //of count is higher than 10 the second digit of the count is in the next address
                     *(output+z) = *(temp+2);
                 }
                 icount=1;
                 break;
             }
- 
         }  
     }
-    free(temp);
-    *(output+(i)) == '\0';
+    free(temp)
 
     return output;
 }
