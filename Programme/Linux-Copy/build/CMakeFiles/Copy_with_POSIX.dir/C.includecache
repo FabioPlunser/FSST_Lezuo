@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/peppi/FSST_Lezuo/Programme/Linux-Copy/src/copy_with_POSIX.c
+stdlib.h
+-
+string.h
+-
+unistd.h
+-
+
