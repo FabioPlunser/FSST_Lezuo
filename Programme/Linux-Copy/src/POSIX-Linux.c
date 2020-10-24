@@ -16,13 +16,13 @@ int copy(char* source, char*destination)
 	int input_file, output_file, read_length, write_length; 
 	void* buffer = malloc(BUF_SIZE); //allocate Buffer
 
-	input_file = open(source, O_RDONLY | O_BINARY); //open source file, also if it's binary open it as binary file
+	input_file = open(source, O_RDONLY); //open source file, also if it's binary open it as binary file
 	if (input_file == -1){ //check if source file has been opened, if not print error: No such file or directory
 		perror("open");
 		return 2;
 	}	
 	
-	output_file = open(destination, (O_RDWR && O_TRUNC) | O_CREAT | O_BINARY, 0644); 	//open Source file as read/write and trunc to start at the beginning of the file
+	output_file = open(destination, (O_RDWR && O_TRUNC) | O_CREAT, 0644); 	//open Source file as read/write and trunc to start at the beginning of the file
 	if (output_file == -1){																//o_creat => create file if doesn't exist yet | O_BINARY open it as a binary file 																					
 		perror("open");																	//0644 only needed for linux, so linux know the permission, 0644 is the normal user permission
 		return 3;
