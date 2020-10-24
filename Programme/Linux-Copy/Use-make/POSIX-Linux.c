@@ -44,9 +44,7 @@ int copy(int argc, char* source, char*destination)
 #endif
 
 
-#if defined(_WIN64)  		//nedded because windows needs O_BINARY in open
-#elif defined(_WIN32)
-
+#if defined(_WIN64) || defined(_WIN32)		//nedded because windows needs O_BINARY in open
 int copy(int argc, char* source, char*destination)
 {
 	int input_file, output_file, read_length, write_length; 
@@ -64,7 +62,7 @@ int copy(int argc, char* source, char*destination)
 	}	
 	
 	output_file = open(destination, (O_RDWR && O_TRUNC) | O_CREAT | O_BINARY); 	//open Source file as read/write and trunc to start at the beginning of the file
-	if (output_file == -1){																//o_creat => create file if doesn't exist yet | O_BINARY open it as a binary file 																					
+	if (output_file == -1){														//o_creat => create file if doesn't exist yet | O_BINARY open it as a binary file 																					
 		perror("open");																	
 		return 3;
 	}

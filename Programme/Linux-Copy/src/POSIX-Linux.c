@@ -8,9 +8,6 @@
 #if defined(__linux__)
 #include <errno.h>
 #include <sys/types.h>
-
-
-
 int copy(char* source, char*destination)
 {
 	int input_file, output_file, read_length, write_length; 
@@ -44,9 +41,7 @@ int copy(char* source, char*destination)
 #endif
 
 
-#if defined(_WIN64)
-#elif defined(_WIN32)
-
+#if defined(_WIN64) || defined(_WIN32)
 int copy(char* source, char*destination)
 {
 	int input_file, output_file, read_length, write_length; 
