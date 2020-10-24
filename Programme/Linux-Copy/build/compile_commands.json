@@ -1,7 +1,7 @@
 [
 {
   "directory": "/home/peppi/FSST_Lezuo/Programme/Linux-Copy/build",
-  "command": "/bin/gcc-9   -g   -o CMakeFiles/Copy_with_POSIX.dir/src/copy_with_POSIX.c.o   -c /home/peppi/FSST_Lezuo/Programme/Linux-Copy/src/copy_with_POSIX.c",
-  "file": "/home/peppi/FSST_Lezuo/Programme/Linux-Copy/src/copy_with_POSIX.c"
+  "command": "/bin/gcc-9   -g   -o CMakeFiles/Copy_with_POSIX.dir/src/POSIX-Linux.c.o   -c /home/peppi/FSST_Lezuo/Programme/Linux-Copy/src/POSIX-Linux.c",
+  "file": "/home/peppi/FSST_Lezuo/Programme/Linux-Copy/src/POSIX-Linux.c"
 }
 ]

@@ -6,11 +6,17 @@
 
 #IncludeRegexTransform: 
 
-/home/peppi/FSST_Lezuo/Programme/Linux-Copy/src/copy_with_POSIX.c
+/home/peppi/FSST_Lezuo/Programme/Linux-Copy/src/POSIX-Linux.c
+stdio.h
+-
 stdlib.h
 -
-string.h
--
 unistd.h
+-
+fcntl.h
+-
+errno.h
+-
+sys/types.h
 -
 

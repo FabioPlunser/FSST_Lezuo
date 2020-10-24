@@ -57,27 +57,27 @@ include CMakeFiles/Copy_with_POSIX.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/Copy_with_POSIX.dir/flags.make
 
-CMakeFiles/Copy_with_POSIX.dir/src/copy_with_POSIX.c.o: CMakeFiles/Copy_with_POSIX.dir/flags.make
-CMakeFiles/Copy_with_POSIX.dir/src/copy_with_POSIX.c.o: ../src/copy_with_POSIX.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/peppi/FSST_Lezuo/Programme/Linux-Copy/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/Copy_with_POSIX.dir/src/copy_with_POSIX.c.o"
-	/bin/gcc-9 $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/Copy_with_POSIX.dir/src/copy_with_POSIX.c.o   -c /home/peppi/FSST_Lezuo/Programme/Linux-Copy/src/copy_with_POSIX.c
+CMakeFiles/Copy_with_POSIX.dir/src/POSIX-Linux.c.o: CMakeFiles/Copy_with_POSIX.dir/flags.make
+CMakeFiles/Copy_with_POSIX.dir/src/POSIX-Linux.c.o: ../src/POSIX-Linux.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/peppi/FSST_Lezuo/Programme/Linux-Copy/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/Copy_with_POSIX.dir/src/POSIX-Linux.c.o"
+	/bin/gcc-9 $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/Copy_with_POSIX.dir/src/POSIX-Linux.c.o   -c /home/peppi/FSST_Lezuo/Programme/Linux-Copy/src/POSIX-Linux.c
 
-CMakeFiles/Copy_with_POSIX.dir/src/copy_with_POSIX.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Copy_with_POSIX.dir/src/copy_with_POSIX.c.i"
-	/bin/gcc-9 $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/peppi/FSST_Lezuo/Programme/Linux-Copy/src/copy_with_POSIX.c > CMakeFiles/Copy_with_POSIX.dir/src/copy_with_POSIX.c.i
+CMakeFiles/Copy_with_POSIX.dir/src/POSIX-Linux.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Copy_with_POSIX.dir/src/POSIX-Linux.c.i"
+	/bin/gcc-9 $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/peppi/FSST_Lezuo/Programme/Linux-Copy/src/POSIX-Linux.c > CMakeFiles/Copy_with_POSIX.dir/src/POSIX-Linux.c.i
 
-CMakeFiles/Copy_with_POSIX.dir/src/copy_with_POSIX.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Copy_with_POSIX.dir/src/copy_with_POSIX.c.s"
-	/bin/gcc-9 $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/peppi/FSST_Lezuo/Programme/Linux-Copy/src/copy_with_POSIX.c -o CMakeFiles/Copy_with_POSIX.dir/src/copy_with_POSIX.c.s
+CMakeFiles/Copy_with_POSIX.dir/src/POSIX-Linux.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Copy_with_POSIX.dir/src/POSIX-Linux.c.s"
+	/bin/gcc-9 $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/peppi/FSST_Lezuo/Programme/Linux-Copy/src/POSIX-Linux.c -o CMakeFiles/Copy_with_POSIX.dir/src/POSIX-Linux.c.s
 
 # Object files for target Copy_with_POSIX
 Copy_with_POSIX_OBJECTS = \
-"CMakeFiles/Copy_with_POSIX.dir/src/copy_with_POSIX.c.o"
+"CMakeFiles/Copy_with_POSIX.dir/src/POSIX-Linux.c.o"
 
 # External object files for target Copy_with_POSIX
 Copy_with_POSIX_EXTERNAL_OBJECTS =
 
-Copy_with_POSIX: CMakeFiles/Copy_with_POSIX.dir/src/copy_with_POSIX.c.o
+Copy_with_POSIX: CMakeFiles/Copy_with_POSIX.dir/src/POSIX-Linux.c.o
 Copy_with_POSIX: CMakeFiles/Copy_with_POSIX.dir/build.make
 Copy_with_POSIX: CMakeFiles/Copy_with_POSIX.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/peppi/FSST_Lezuo/Programme/Linux-Copy/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking C executable Copy_with_POSIX"

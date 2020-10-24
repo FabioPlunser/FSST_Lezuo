@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/home/peppi/FSST_Lezuo/Programme/Linux-Copy/src/copy_with_POSIX.c" "/home/peppi/FSST_Lezuo/Programme/Linux-Copy/build/CMakeFiles/Copy_with_POSIX.dir/src/copy_with_POSIX.c.o"
+  "/home/peppi/FSST_Lezuo/Programme/Linux-Copy/src/POSIX-Linux.c" "/home/peppi/FSST_Lezuo/Programme/Linux-Copy/build/CMakeFiles/Copy_with_POSIX.dir/src/POSIX-Linux.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

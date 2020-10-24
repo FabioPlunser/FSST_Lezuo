@@ -1,42 +1,44 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <unistd.h>
 #include <fcntl.h>
 #include <errno.h>
 #include <sys/types.h>
-#include <unistd.h>
-
 #define BUF_SIZE 20
 
 int main(int argc, char **argv)
 {
 	int input_file, output_file, read_length, write_length;
-	int O_RDONLY, O_RDWR, O_CREAT, O_WRONLY; 
-	size_t O_TRUNC;
 	char* buffer = malloc(BUF_SIZE);
 	
-	printf("%s\n", argv[1]);
-	printf("%s\n", argv[2]);
+		
+	if(argc != 3){
+		printf("Usage: name of exe file1 file2\n");
+		return 1;
+	}
 
 	input_file = open(argv[1], O_RDONLY); 
-	output_file = open(argv[2], O_WRONLY && O_TRUNC);
+	if (input_file == -1){
+		perror("open");
+		return 2;
+	}	
 	
-	printf("input-file: %i\n", input_file);
-	printf("output-file: %i\n", output_file);
+	output_file = open(argv[2], (O_RDWR && O_TRUNC) | O_CREAT, 0644);
+	if (output_file == -1){
+		perror("open");
+		return 3;
+	}
 	
 	
-	read_length = read(input_file, buffer, BUF_SIZE); 
-	printf("read: %i\n", read_length);
-	write_length = write(output_file, buffer, strlen(buffer));
-	printf("read: %i\n", write_length);
 	
-	// if (write_length != read_length){
-	// 	printf("There has been an error");
-	// }	
-	// else{
-	// 	close(input_file);
-	// 	close(output_file);
-	// }
+	while ((read_length = read(input_file, buffer, BUF_SIZE))>0){
+		write_length = write(output_file, buffer, read_length);
+		if(write_length != read_length){
+			perror("write");
+			return 4; 
+		}
+	}
+	printf("Read %s and wrote it in %s file\n",buffer, argv[2]);
 	close(input_file);
 	close(output_file);
 }

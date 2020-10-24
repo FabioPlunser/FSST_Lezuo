@@ -520,32 +520,32 @@ Copy_with_POSIX/fast:
 	$(MAKE) -f CMakeFiles/Copy_with_POSIX.dir/build.make CMakeFiles/Copy_with_POSIX.dir/build
 .PHONY : Copy_with_POSIX/fast
 
-src/copy_with_POSIX.o: src/copy_with_POSIX.c.o
+src/POSIX-Linux.o: src/POSIX-Linux.c.o
 
-.PHONY : src/copy_with_POSIX.o
+.PHONY : src/POSIX-Linux.o
 
 # target to build an object file
-src/copy_with_POSIX.c.o:
-	$(MAKE) -f CMakeFiles/Copy_with_POSIX.dir/build.make CMakeFiles/Copy_with_POSIX.dir/src/copy_with_POSIX.c.o
-.PHONY : src/copy_with_POSIX.c.o
+src/POSIX-Linux.c.o:
+	$(MAKE) -f CMakeFiles/Copy_with_POSIX.dir/build.make CMakeFiles/Copy_with_POSIX.dir/src/POSIX-Linux.c.o
+.PHONY : src/POSIX-Linux.c.o
 
-src/copy_with_POSIX.i: src/copy_with_POSIX.c.i
+src/POSIX-Linux.i: src/POSIX-Linux.c.i
 
-.PHONY : src/copy_with_POSIX.i
+.PHONY : src/POSIX-Linux.i
 
 # target to preprocess a source file
-src/copy_with_POSIX.c.i:
-	$(MAKE) -f CMakeFiles/Copy_with_POSIX.dir/build.make CMakeFiles/Copy_with_POSIX.dir/src/copy_with_POSIX.c.i
-.PHONY : src/copy_with_POSIX.c.i
+src/POSIX-Linux.c.i:
+	$(MAKE) -f CMakeFiles/Copy_with_POSIX.dir/build.make CMakeFiles/Copy_with_POSIX.dir/src/POSIX-Linux.c.i
+.PHONY : src/POSIX-Linux.c.i
 
-src/copy_with_POSIX.s: src/copy_with_POSIX.c.s
+src/POSIX-Linux.s: src/POSIX-Linux.c.s
 
-.PHONY : src/copy_with_POSIX.s
+.PHONY : src/POSIX-Linux.s
 
 # target to generate assembly for a file
-src/copy_with_POSIX.c.s:
-	$(MAKE) -f CMakeFiles/Copy_with_POSIX.dir/build.make CMakeFiles/Copy_with_POSIX.dir/src/copy_with_POSIX.c.s
-.PHONY : src/copy_with_POSIX.c.s
+src/POSIX-Linux.c.s:
+	$(MAKE) -f CMakeFiles/Copy_with_POSIX.dir/build.make CMakeFiles/Copy_with_POSIX.dir/src/POSIX-Linux.c.s
+.PHONY : src/POSIX-Linux.c.s
 
 # Help Target
 help:
@@ -587,9 +587,9 @@ help:
 	@echo "... ContinuousTest"
 	@echo "... ContinuousSubmit"
 	@echo "... Copy_with_POSIX"
-	@echo "... src/copy_with_POSIX.o"
-	@echo "... src/copy_with_POSIX.i"
-	@echo "... src/copy_with_POSIX.s"
+	@echo "... src/POSIX-Linux.o"
+	@echo "... src/POSIX-Linux.i"
+	@echo "... src/POSIX-Linux.s"
 .PHONY : help
 
 
