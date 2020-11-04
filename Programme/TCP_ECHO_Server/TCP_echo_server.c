@@ -12,7 +12,7 @@
 #include <pthread.h> 
 
 #define Address "127.0.0.1"
-#define Port 8888  
+#define Port 8080
 #define BUFSIZE 32
 #define Backlog 2
 
@@ -47,30 +47,51 @@ char* encode(char* str)
 
 
 
-void* handle_connection(int acceptfd, int socketfd)
+void* handle_connection(int acceptfd)
 {   
-    
+    char* writing = "Please type a string, the server will return the RLE encoded string:\n";
+    if (send(acceptfd, writing ,strlen(writing), 0) == -1){
+            handle_error("send");
+            close(acceptfd);
+        }
     char buf[BUFSIZE]; 
+    char* output = malloc(BUFSIZE);
     int bytes_read;
     
-    while ((bytes_read = read(acceptfd, buf, sizeof(buf))) > 0 )
-    {
-        if(bytes_read > BUFSIZE-1 || buf[bytes_read-1] == '\n') break; 
-    }
-    buf[bytes_read-1] = 0;
-
-    fprintf(stderr, "Buf: %s\n", buf);
-
-    char* rleresult = encode(buf);
-
-    fprintf(stderr, "RLE: %s\n", rleresult);
     
-    char* output;
-    sprintf(output, "Server answer: %s\n", rleresult);
-    if (send(acceptfd, output, strlen(output), 0) == -1){
-            handle_error("send");
-            close(socketfd);
+
+    while(strcmp(buf, "close") != 0)
+    {
+        while ((bytes_read = read(acceptfd, buf, sizeof(buf))) > 0 )
+        {
+            if(bytes_read > BUFSIZE-1 || buf[bytes_read-1] == '\n') break; 
         }
+        buf[bytes_read-1] = 0;
+        fprintf(stderr, "Buf: %s\n", buf);
+
+        char* rleresult = encode(buf);
+
+        fprintf(stderr, "RLE: %s\n", rleresult);
+
+        
+        strcpy(output, "Server answer:");
+        strcat(output, rleresult);
+        strcat(output, "\n");
+        if (send(acceptfd, output ,strlen(output), 0) == -1){
+                handle_error("send");
+                close(acceptfd);
+            }
+        free(output);
+        
+    }
+    
+    char* closing = "By client, connection is getting closed\n";
+    if (send(acceptfd, closing ,strlen(closing), 0) == -1){
+            handle_error("send");
+            close(acceptfd);
+        }
+    
+    close(acceptfd);
 }
 
 
@@ -82,9 +103,6 @@ int connection()
     addr.sin_family = AF_INET;
     addr.sin_addr.s_addr = inet_addr(Address);
     addr.sin_port = htons(Port);
-
-      
-
     
     int socketfd = socket(AF_INET, SOCK_STREAM, 0);
     if (socketfd == -1){
@@ -115,11 +133,11 @@ int connection()
         if(acceptfd == -1)
         {
             handle_error("accept");
-            close(socketfd);
+            close(acceptfd);
             return EXIT_FAILURE;
         }    
         
-        handle_connection(acceptfd, socketfd);      
+        handle_connection(acceptfd);      
     }
     return EXIT_FAILURE;
 }
