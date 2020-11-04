@@ -51,7 +51,7 @@ int main()
 
     }
     
-    socklen_t address_len = sizeof(struct sockaddr_in);
+    // socklen_t address_len = sizeof(struct sockaddr_in);
     
     int acceptfd = accept(socketfd, (struct sockaddr*) &addr, &address_len);
     if(acceptfd == -1)
