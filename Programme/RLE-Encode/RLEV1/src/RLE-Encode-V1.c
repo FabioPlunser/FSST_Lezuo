@@ -30,8 +30,8 @@ char* encode(char* str)
 
         for(j = i+1; j<=strlen(str); j++) 
         {
-            if(str[j] == character) //Checks how often one specific charakter is in the string        {
-                icount++;
+            if(str[j] == character) //Checks how often one specific charakter is in the string        
+            {    icount++;
                 i++;
             
             }else
@@ -49,7 +49,7 @@ char* encode(char* str)
             }
         }  
     }
-    free(temp)
+    free(temp);
 
     return output;
 }
