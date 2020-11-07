@@ -47,12 +47,12 @@ char* encode(char* str)
 
 
 
-void* handle_connection(int acceptfd)
+void* handle_connection(int clientfd)
 {   
     char* writing = "Please type a string, the server will return the RLE encoded string:\n";
-    if (send(acceptfd, writing ,strlen(writing), 0) == -1){
+    if (send(clientfd, writing ,strlen(writing), 0) == -1){
             handle_error("send");
-            close(acceptfd);
+            close(clientfd);
         }
     char buf[BUFSIZE]; 
     char* output = malloc(BUFSIZE);
@@ -62,7 +62,7 @@ void* handle_connection(int acceptfd)
 
     while(strcmp(buf, "close") != 0)
     {
-        while ((bytes_read = read(acceptfd, buf, sizeof(buf))) > 0 )
+        while ((bytes_read = read(clientfd, buf, sizeof(buf))) > 0 )
         {
             if(bytes_read > BUFSIZE-1 || buf[bytes_read-1] == '\n') break; 
         }
@@ -77,34 +77,35 @@ void* handle_connection(int acceptfd)
         strcpy(output, "Server answer:");
         strcat(output, rleresult);
         strcat(output, "\n");
-        if (send(acceptfd, output ,strlen(output), 0) == -1){
+        if (send(clientfd, output ,strlen(output), 0) == -1){
                 handle_error("send");
-                close(acceptfd);
+                close(clientfd);
             }
         free(output);
         
     }
     
     char* closing = "By client, connection is getting closed\n";
-    if (send(acceptfd, closing ,strlen(closing), 0) == -1){
+    if (send(clientfd, closing ,strlen(closing), 0) == -1){
             handle_error("send");
-            close(acceptfd);
+            close(clientfd);
         }
     
-    close(acceptfd);
+    close(clientfd);
 }
 
 
 
 int connection()
-{
+{   
+    int socketfd, clientfd;
     struct sockaddr_in addr;
     memset(&addr, 0 , sizeof(struct sockaddr_in));
     addr.sin_family = AF_INET;
     addr.sin_addr.s_addr = inet_addr(Address);
     addr.sin_port = htons(Port);
     
-    int socketfd = socket(AF_INET, SOCK_STREAM, 0);
+    socketfd = socket(AF_INET, SOCK_STREAM, 0);
     if (socketfd == -1){
         printf("Socket could not me created");
         handle_error("socket");
@@ -122,22 +123,28 @@ int connection()
         handle_error("listen");
     }
     printf("Listening\n");
-    
-    
-    while (1)
+    socklen_t socklen = sizeof(addr);
+    pthread_t thread_id;
+
+    while ((clientfd = accept(socketfd, (struct sockaddr *)&addr, &socklen)))
     {   
-        printf("Waiting for connections...\n");
-        socklen_t socklen = sizeof(addr);
-        int acceptfd = accept(socketfd, &addr, &socklen);
-        printf("Client with IP %s connected\n", inet_ntoa(addr.sin_addr));
-        if(acceptfd == -1)
+        fprintf(stderr, "Accepted connection\n");
+
+
+        fprintf(stderr, "Client with IP %s connected, descriptor %i\n", inet_ntoa(addr.sin_addr), clientfd);
+        if(clientfd < 0)
         {
             handle_error("accept");
-            close(acceptfd);
+            close(clientfd);
             return EXIT_FAILURE;
         }    
         
-        handle_connection(acceptfd);      
+        if(pthread_create(&thread_id, NULL, handle_connection, clientfd) < 0)
+        {
+            handle_error("accept");
+            close(clientfd);
+            return EXIT_FAILURE;
+        }   
     }
     return EXIT_FAILURE;
 }
