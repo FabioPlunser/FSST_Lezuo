@@ -13,8 +13,8 @@
 #include <pthread.h> 
 
 #define Address "127.0.0.1"
-#define Port 1234
-#define BUFSIZE 32
+#define Port 8080
+#define BUFSIZE 100
 #define Backlog 2
 
 #define handle_error(msg) \
@@ -22,9 +22,8 @@
 
 char* encode(char* str)
 {    
-    
-    char* output = malloc(BUFSIZE);  //memory allocation
-    char* count = malloc(BUFSIZE);
+    char* output = malloc(strlen(str));  //memory allocation
+    char* count = malloc(strlen(str));
 
     int j, i, x = 0;
 
@@ -50,19 +49,16 @@ char* encode(char* str)
 void* handle_connection(int clientfd)
 {   
     char* writing = "Please type a string, the server will return the RLE encoded string:\n";
-    if (send(clientfd, writing ,strlen(writing), 0) == -1){
+    if (send(clientfd, writing , strlen(writing), 0) == -1){
             handle_error("send");
             close(clientfd);
         }
-    char buf[BUFSIZE]; 
+    char* buf = malloc(BUFSIZE) ; 
     char* output = malloc(BUFSIZE);
-    int bytes_read;
     
-    
-
-    while((strcmp(buf, "close") != 0) || strcmp(buf, "") != 0) 
+    while((strcmp(buf, "close") != 0)) 
     {
-        bytes_read = read(clientfd, buf, sizeof(buf))
+        int bytes_read = read(clientfd, buf, sizeof(buf));
         
         if (bytes_read == 0)
         {
@@ -76,15 +72,14 @@ void* handle_connection(int clientfd)
 
         printf("RLE: %s\n", rleresult);
 
-        
         output = "Server Answer:";
-        if (send(clientfd, output ,strlen(output), 0) == -1){
+        if (send(clientfd, output, strlen(output), 0) == -1){
                 handle_error("send");
                 close(clientfd);
             }
         output = rleresult;
         strcat(output, "\n");
-        if (send(clientfd, output ,strlen(output), 0) == -1){
+        if (send(clientfd, output, strlen(output), 0) == -1){
                 handle_error("send");
                 close(clientfd);
             }
@@ -125,7 +120,6 @@ int connection()
 
     if(listen(socketfd, Backlog) == -1)
     {
-        printf("schlecht2");
         handle_error("listen");
     }
     printf("Listening\n");
@@ -135,9 +129,6 @@ int connection()
     
     while ((clientfd = accept(socketfd, (struct sockaddr *)&addr, &socklen)))
     {   
-        printf("Accepted connection\n");
-
-
         printf("Client with IP %s connected, descriptor %i\n", inet_ntoa(addr.sin_addr), clientfd);
         if(clientfd < 0)
         {
@@ -156,7 +147,7 @@ int connection()
     return EXIT_FAILURE;
 }
 
-int main()
+int main(int argc, char **argv)
 {
-    connection();
+    connection();    
 }
