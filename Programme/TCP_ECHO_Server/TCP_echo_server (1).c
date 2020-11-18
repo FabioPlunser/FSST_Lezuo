@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include  <signal.h>
 
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -12,7 +13,7 @@
 #include <pthread.h> 
 
 #define Address "127.0.0.1"
-#define Port 8080
+#define Port 1234
 #define BUFSIZE 32
 #define Backlog 2
 
@@ -46,7 +47,6 @@ char* encode(char* str)
 }
 
 
-
 void* handle_connection(int clientfd)
 {   
     char* writing = "Please type a string, the server will return the RLE encoded string:\n";
@@ -60,32 +60,32 @@ void* handle_connection(int clientfd)
     
     
 
-    while(strcmp(buf, "close") != 0)
+    while((strcmp(buf, "close") != 0) || strcmp(buf, "") != 0) 
     {
-        bytes_read = read(clientfd, buf, sizeof(buf))
-        
-        if (bytes_read == 0)
+        while ((bytes_read = read(clientfd, buf, sizeof(buf))) > 0 )
         {
-            break; 
-        } 
-        
+            if(bytes_read > BUFSIZE-1 || buf[bytes_read-1] == '\n') break; 
+        }
         buf[bytes_read-1] = 0;
-        fprintf(stderr, "Buf: %s\n", buf);
+        printf("Buf: %s\n", buf);
 
         char* rleresult = encode(buf);
 
-        fprintf(stderr, "RLE: %s\n", rleresult);
+        printf("RLE: %s\n", rleresult);
 
         
-        strcpy(output, "Server answer:");
-        strcat(output, rleresult);
+        output = "Server Answer:";
+        if (send(clientfd, output ,strlen(output), 0) == -1){
+                handle_error("send");
+                close(clientfd);
+            }
+        output = rleresult;
         strcat(output, "\n");
         if (send(clientfd, output ,strlen(output), 0) == -1){
                 handle_error("send");
                 close(clientfd);
             }
         free(output);
-        
     }
     
     char* closing = "By client, connection is getting closed\n";
@@ -128,13 +128,14 @@ int connection()
     printf("Listening\n");
     socklen_t socklen = sizeof(addr);
     pthread_t thread_id;
-
+    
+    
     while ((clientfd = accept(socketfd, (struct sockaddr *)&addr, &socklen)))
     {   
-        fprintf(stderr, "Accepted connection\n");
+        printf("Accepted connection\n");
 
 
-        fprintf(stderr, "Client with IP %s connected, descriptor %i\n", inet_ntoa(addr.sin_addr), clientfd);
+        printf("Client with IP %s connected, descriptor %i\n", inet_ntoa(addr.sin_addr), clientfd);
         if(clientfd < 0)
         {
             handle_error("accept");
