@@ -35,11 +35,42 @@ void* create_buffer()
     return BFBuffer;
 }
 
+// not recursive
+// void* compare(char* input, void* BFBuffer)
+// {
+//     int diff = 1;
+//     int i = 2;
+//     while(diff !=0)
+//     {
+//         if (diff > 0)
+//         {
+//             BFBuffer+=(BFBuffer_Size/i);
+//             while(*((char*)BFBuffer-1) != 0){
+//                 BFBuffer++;
+//             }
 
+//             diff = strcmp(input, (char*)BFBuffer);
+//             i = i*2;
+//         }
+//         else
+//         {
+//             BFBuffer-=(BFBuffer_Size/i);
+//             while(*((char*)BFBuffer-1) != 0){
+//                 BFBuffer--;
+//             }
+
+//             diff = strcmp(input, (char*)BFBuffer);
+//             i = i*2;
+//         }
+//         printf("%s\n", (char*)BFBuffer);
+//         if(i>BFBuffer_Size) return NULL;
+//     }
+//     return BFBuffer;
+// }
+
+//revursive
 void* compare(char* input, void* BFBuffer)
 {
-    
-    
     if (diff > 0)
     {
         BFBuffer+=(BFBuffer_Size/i);
@@ -93,7 +124,6 @@ int main()
         
         void* res = compare(input, BFBuffer);
         
-        // void* res = compare(input);
 
         gettimeofday(&tv_begin, NULL);
 

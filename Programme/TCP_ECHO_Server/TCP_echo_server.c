@@ -13,8 +13,8 @@
 #include <pthread.h> 
 
 #define Address "127.0.0.1"
-#define Port 8080
-#define BUFSIZE 100
+#define Port 8888
+#define BUFSIZE 5
 #define Backlog 2
 
 #define handle_error(msg) \  
@@ -22,8 +22,8 @@
 
 char* encode(char* str) // RLE Encode
 {    
-    char* output = malloc(strlen(str));  //memory allocation
-    char* count = malloc(strlen(str));
+    char* output = malloc(strlen(str)-1);  //memory allocation
+    char* count = malloc(strlen(str)-1);
 
     int j, i, x = 0;
 
@@ -51,7 +51,7 @@ void* handle_connection(int clientfd)   //receives from client and sends
     char* buf = malloc(BUFSIZE);    //reserve RAM
     char* output = malloc(BUFSIZE); 
 
-    char* writing = "Please type a string, the server will return the RLE encoded string:\n";   //write what the client can do
+    char* writing = "Please type a string, the server will return the RLE encoded string\n Without space pleasse: \n";   //write what the client can do
     if (send(clientfd, writing , strlen(writing), 0) == -1){
             handle_error("send");
             close(clientfd);
@@ -60,7 +60,7 @@ void* handle_connection(int clientfd)   //receives from client and sends
 
     while(1) 
     {
-        int bytes_read = read(clientfd, buf, sizeof(buf)); //receive data from client.
+        int bytes_read = read(clientfd, buf, BUFSIZ); //receive data from client.
         
         if (bytes_read == 0)
         {
@@ -75,7 +75,7 @@ void* handle_connection(int clientfd)   //receives from client and sends
         printf("RLE: %s\n", rleresult); //print RLE result
 
         //Print Server answer with RLE Result
-        output = "Server Answer:";
+        output = "Server Answer: ";
         if (send(clientfd, output, strlen(output), 0) == -1){
                 handle_error("send");
                 close(clientfd);
@@ -86,6 +86,7 @@ void* handle_connection(int clientfd)   //receives from client and sends
                 handle_error("send");
                 close(clientfd);
             }
+       
         free(output);
     }
     close(clientfd);
