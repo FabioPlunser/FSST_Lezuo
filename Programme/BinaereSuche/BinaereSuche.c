@@ -96,8 +96,9 @@ void* compare(char* input, void* BFBuffer)
             diff = strcmp(input, BFBuffer);
             i = i*2;
         }
-        compare(input, BFBuffer);
         if(i>sizeof(BFBuffer)) return NULL;
+        compare(input, BFBuffer);
+        
     }
     printf("Compare Found: %s\n", (char*)BFBuffer);
     return BFBuffer;
