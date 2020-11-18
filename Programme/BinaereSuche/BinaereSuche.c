@@ -38,35 +38,39 @@ void* create_buffer()
 
 void* compare(char* input, void* BFBuffer)
 {
-    diff = 1;
-        i = 2;
-    while(diff != 0)
+    
+    
+    if (diff > 0)
     {
-        if (diff > 0)
-        {
-            BFBuffer+=(BFBuffer_Size/i);
-            while(*((char*)BFBuffer-1) != 0){
-                BFBuffer++;
-            }
-
-            diff = strcmp(input, (char*)BFBuffer);
-            i = i*2;
+        BFBuffer+=(BFBuffer_Size/i);
+        while(*((char*)BFBuffer-1) != 0){
+            BFBuffer++;
         }
-        else
-        {
-            BFBuffer-=(BFBuffer_Size/i);
-            while(*((char*)BFBuffer-1) != 0){
-                BFBuffer--;
-            }
 
-            diff = strcmp(input, (char*)BFBuffer);
-            i = i*2;
-        }
-        printf("%s\n", (char*)BFBuffer);
-        if(i>BFBuffer_Size) return NULL;
-        
+        diff = strcmp(input, (char*)BFBuffer);
+        i = i*2;
     }
-    return BFBuffer;
+    else
+    {
+        BFBuffer-=(BFBuffer_Size/i);
+        while(*((char*)BFBuffer-1) != 0){
+            BFBuffer--;
+        }
+
+        diff = strcmp(input, (char*)BFBuffer);
+        i = i*2;
+    }
+    printf("%s\n", (char*)BFBuffer);
+    
+    if(diff == 0)
+    {
+        diff = 1;
+        i = 2;
+        return BFBuffer;
+    }
+    if(i>BFBuffer_Size) return NULL;
+
+    return compare(input, BFBuffer);
 }
 
 
