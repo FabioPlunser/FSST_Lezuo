@@ -57,7 +57,7 @@ void* handle_connection(int clientfd)   //receives from client and sends
             close(clientfd);
     }
     
-    
+
     while(1) 
     {
         int bytes_read = read(clientfd, buf, sizeof(buf)); //receive data from client.
