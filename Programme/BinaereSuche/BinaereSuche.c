@@ -16,17 +16,17 @@
 #include <unistd.h> 
 #include <fcntl.h>
 
-#define BFBuffer_Size 500000
+#define BFBuffer_Size 5000000
 
 int diff = 1;
 int i = 2;
 
-void* create_buffer() //write word file in buffer, just read 5 million bytes. 
+void* create_buffer()
 {
     int wortbuffer, read_length;
-    void* BFBuffer = malloc(BFBuffer_Size); //reserve big fucking buffer
+    void* BFBuffer = malloc(BFBuffer_Size);
 
-    wortbuffer = open("wortbuffer", O_RDONLY); 
+    wortbuffer = open("wortbuffer", O_RDONLY);
     if (wortbuffer == -1)
     {
         perror("open");
@@ -35,39 +35,41 @@ void* create_buffer() //write word file in buffer, just read 5 million bytes.
     return BFBuffer;
 }
 
-void* compare(char* input, void* BFBuffer) //compare buffer with input
+
+void* compare(char* input, void* BFBuffer)
 {
-    diff = strcmp(input, BFBuffer);
-    
-    while(diff != 0) //as long as input string is not buffer string do following
+    diff = 1;
+        i = 2;
+    while(diff != 0)
     {
-        if (diff > 0)  // if strcmp is bigger than 0 than input is bigger than buffer, so need to go higher in the buffer to be the same
+        if (diff > 0)
         {
-            BFBuffer+=(BFBuffer_Size/i); // binary search, go from zero to the middle and go to a higher string, at half of before
-            if(((char*)BFBuffer-1) != 0){
+            BFBuffer+=(BFBuffer_Size/i);
+            while(*((char*)BFBuffer-1) != 0){
                 BFBuffer++;
             }
 
-            diff = strcmp(input, BFBuffer); 
-            i = i*2; //multiply by two to get to the half of the half
+            diff = strcmp(input, (char*)BFBuffer);
+            i = i*2;
         }
-        else if (diff < 0) // if strcmp less than 0, need to go left or lower in the buffer
+        else
         {
-            BFBuffer-=(BFBuffer_Size/i); // binary search, go from zero to the middle and go to a lower string, at half of before
-            if(((char*)BFBuffer-1) != 0){
+            BFBuffer-=(BFBuffer_Size/i);
+            while(*((char*)BFBuffer-1) != 0){
                 BFBuffer--;
             }
 
-            diff = strcmp(input, BFBuffer);
-            i = i*2; //multiply by two to get to the half of the half
+            diff = strcmp(input, (char*)BFBuffer);
+            i = i*2;
         }
         printf("%s\n", (char*)BFBuffer);
-        if(i>sizeof(BFBuffer)) return NULL; //because some words are not in it, need to catch int overflow
-        compare(input, BFBuffer); //recursive
+        if(i>BFBuffer_Size) return NULL;
         
     }
-    return BFBuffer; //return BFBuffer, now it should only have the searched word in it
+    return BFBuffer;
 }
+
+
 
 int main()
 {
@@ -80,15 +82,18 @@ int main()
 
         if(!strlen(input)) break;
 
-        void* BFBuffer = create_buffer(); //get wordfile in buffer in function create buffer
-
+        void* BFBuffer = create_buffer();
         struct timeval tv_begin, tv_end, tv_diff;
     
-        gettimeofday(&tv_begin, NULL); //get time before searching 
-        void* res = compare(input, BFBuffer); //get result if input is in BFBuffer
-        gettimeofday(&tv_begin, NULL); //get time after searching
+        gettimeofday(&tv_begin, NULL);
+        
+        void* res = compare(input, BFBuffer);
+        
+        // void* res = compare(input);
 
-        timersub(&tv_end, &tv_begin, &tv_diff); // subtract time before with time after to get how long it took
+        gettimeofday(&tv_begin, NULL);
+
+        timersub(&tv_end, &tv_begin, &tv_diff);
 
         if(res != NULL)
         {
