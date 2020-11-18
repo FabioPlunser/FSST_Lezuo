@@ -17,10 +17,10 @@
 #define BUFSIZE 100
 #define Backlog 2
 
-#define handle_error(msg) \
-    do { perror(msg); exit(EXIT_FAILURE); } while (0)
+#define handle_error(msg) \  
+    do { perror(msg); exit(EXIT_FAILURE); } while (0) // Error handler, directly copied from bind man page
 
-char* encode(char* str)
+char* encode(char* str) // RLE Encode
 {    
     char* output = malloc(strlen(str));  //memory allocation
     char* count = malloc(strlen(str));
@@ -46,32 +46,35 @@ char* encode(char* str)
 }
 
 
-void* handle_connection(int clientfd)
+void* handle_connection(int clientfd)   //receives from client and sends
 {   
-    char* writing = "Please type a string, the server will return the RLE encoded string:\n";
+    char* buf = malloc(BUFSIZE);    //reserve RAM
+    char* output = malloc(BUFSIZE); 
+
+    char* writing = "Please type a string, the server will return the RLE encoded string:\n";   //write what the client can do
     if (send(clientfd, writing , strlen(writing), 0) == -1){
             handle_error("send");
             close(clientfd);
-        }
-    char* buf = malloc(BUFSIZE) ; 
-    char* output = malloc(BUFSIZE);
+    }
     
-    while((strcmp(buf, "close") != 0)) 
+    
+    while(1) 
     {
-        int bytes_read = read(clientfd, buf, sizeof(buf));
+        int bytes_read = read(clientfd, buf, sizeof(buf)); //receive data from client.
         
         if (bytes_read == 0)
         {
             break; 
         } 
         
-        buf[bytes_read-1] = 0;
-        printf("Buf: %s\n", buf);
+        buf[bytes_read-1] = 0;  //set EOS
+        printf("Buf: %s\n", buf); //Print Buf
 
-        char* rleresult = encode(buf);
+        char* rleresult = encode(buf); //get the result of the RLE
 
-        printf("RLE: %s\n", rleresult);
+        printf("RLE: %s\n", rleresult); //print RLE result
 
+        //Print Server answer with RLE Result
         output = "Server Answer:";
         if (send(clientfd, output, strlen(output), 0) == -1){
                 handle_error("send");
@@ -85,49 +88,42 @@ void* handle_connection(int clientfd)
             }
         free(output);
     }
-    
-    char* closing = "By client, connection is getting closed\n";
-    if (send(clientfd, closing ,strlen(closing), 0) == -1){
-            handle_error("send");
-            close(clientfd);
-        }
-    
     close(clientfd);
 }
 
 
-
 int connection()
 {   
+    //Set all variables
     int socketfd, clientfd;
     struct sockaddr_in addr;
     memset(&addr, 0 , sizeof(struct sockaddr_in));
-    addr.sin_family = AF_INET;
-    addr.sin_addr.s_addr = inet_addr(Address);
-    addr.sin_port = htons(Port);
+    addr.sin_family = AF_INET;  //set socket to use IPv4
+    addr.sin_addr.s_addr = inet_addr(Address); //convert the string pointed to by cp, in the standard IPv4 dotted decimal notation, to an integer value suitable for use as an Internet address.
+    addr.sin_port = htons(Port); //convert the unsigned short integer hostshort from host byte order to network byte order.
     
-    socketfd = socket(AF_INET, SOCK_STREAM, 0);
+    socketfd = socket(AF_INET, SOCK_STREAM, 0); //create socket 
     if (socketfd == -1){
-        printf("Socket could not me created");
         handle_error("socket");
     }
-    if(bind(socketfd, (struct sockaddr*) &addr, sizeof(struct sockaddr_in)) == -1)
+    if(bind(socketfd, (struct sockaddr*) &addr, sizeof(struct sockaddr_in)) == -1) //bind socket to properties
     {   
         handle_error("bind");
     }        
     
     printf("Started Socket at %s %i\n", Address, Port);
 
-    if(listen(socketfd, Backlog) == -1)
+    if(listen(socketfd, Backlog) == -1) //listen for connections
     {
         handle_error("listen");
     }
+    
     printf("Listening\n");
     socklen_t socklen = sizeof(addr);
     pthread_t thread_id;
     
     
-    while ((clientfd = accept(socketfd, (struct sockaddr *)&addr, &socklen)))
+    while ((clientfd = accept(socketfd, (struct sockaddr *)&addr, &socklen))) //accept connection of every user 
     {   
         printf("Client with IP %s connected, descriptor %i\n", inet_ntoa(addr.sin_addr), clientfd);
         if(clientfd < 0)
@@ -137,7 +133,7 @@ int connection()
             return EXIT_FAILURE;
         }    
         
-        if(pthread_create(&thread_id, NULL, handle_connection, clientfd) < 0)
+        if(pthread_create(&thread_id, NULL, handle_connection, clientfd) < 0) //create a new thread that handles the connection
         {
             handle_error("accept");
             close(clientfd);

@@ -74,9 +74,16 @@ void* compare(int input)
     }
     void* BFbuffer = malloc(read_length);
 
-    char* search_inde = malloc(sizeof(input));
+    read_length = read(input_file, BFbuffer, BUF_SIZE);
+    if (read_length == -1)
+    {
+        perror("read");
+        return EXIT_FAILURE;
+    }
     
+    char* search_inde = malloc(sizeof(input));
 
+    
 }
 
 int main()
