@@ -22,8 +22,8 @@
 
 char* encode(char* str) // RLE Encode
 {    
-    char* output = malloc(strlen(str)-1);  //memory allocation
-    char* count = malloc(strlen(str)-1);
+    char* output = malloc(strlen(str)*2);  //memory allocation
+    char* count = malloc(strlen(str)*2);
 
     int j, i, x = 0;
 
@@ -51,7 +51,7 @@ void* handle_connection(int clientfd)   //receives from client and sends
     char* buf = malloc(BUFSIZE);    //reserve RAM
     char* output = malloc(BUFSIZE); 
 
-    char* writing = "Please type a string, the server will return the RLE encoded string\n Without space pleasse: \n";   //write what the client can do
+    char* writing = "Please type a string, the server will return the RLE encoded string\nWithout space pleasse: \n";   //write what the client can do
     if (send(clientfd, writing , strlen(writing), 0) == -1){
             handle_error("send");
             close(clientfd);
