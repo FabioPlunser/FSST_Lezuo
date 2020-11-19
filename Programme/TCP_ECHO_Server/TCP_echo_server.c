@@ -49,7 +49,6 @@ char* encode(char* str) // RLE Encode
 void* handle_connection(int clientfd)   //receives from client and sends
 {   
     char* buf = malloc(BUFSIZE);    //reserve RAM
-    char* output = malloc(BUFSIZE); 
 
     char* writing = "Please type a string, the server will return the RLE encoded string\nWithout space pleasse: \n";   //write what the client can do
     if (send(clientfd, writing , strlen(writing), 0) == -1){
@@ -75,7 +74,7 @@ void* handle_connection(int clientfd)   //receives from client and sends
         printf("RLE: %s\n", rleresult); //print RLE result
 
         //Print Server answer with RLE Result
-        output = "Server Answer: ";
+        char* output = "Server Answer: ";
         if (send(clientfd, output, strlen(output), 0) == -1){
                 handle_error("send");
                 close(clientfd);
@@ -89,6 +88,7 @@ void* handle_connection(int clientfd)   //receives from client and sends
        
         free(output);
     }
+    
     close(clientfd);
 }
 
