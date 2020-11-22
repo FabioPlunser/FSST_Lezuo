@@ -1,3 +1,15 @@
+// Author: FabioPlunser //
+// Date: 24.10.2020 //
+// GIT-Repo: https://github.com/FabioPlunser/FSST_Lezuo
+// Specifig Git-location: https://github.com/FabioPlunser/FSST_Lezuo/blob/main/Programme/Linux-Copy/src/POSIX-Linux.c //
+// Compiled with make, in WSL using Ubuntu 20.0.4, as you can see in my Repo //
+
+//TCP-echo-server//
+
+//$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
