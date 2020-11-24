@@ -23,7 +23,7 @@
 #include <pthread.h> 
 
 #define Address "127.0.0.1"
-#define Port 8888
+#define Port 1234
 #define BUFSIZE 5
 #define Backlog 2
 
@@ -60,7 +60,7 @@ void* handle_connection(int clientfd)   //receives from client and sends
 {   
     char* buf = malloc(BUFSIZE);    //reserve RAM
 
-    char* writing = "Please type a string, the server will return the RLE encoded string\nWithout space pleasse: \n";   //write what the client can do
+    char* writing = "Please type a string, the server will return the RLE encoded string\n";   //write what the client can do
     if (send(clientfd, writing , strlen(writing), 0) == -1){
             handle_error("send");
             close(clientfd);
@@ -69,10 +69,12 @@ void* handle_connection(int clientfd)   //receives from client and sends
 
     while(1) 
     {
-        int bytes_read = read(clientfd, buf, BUFSIZ); //receive data from client.
+        int bytes_read = recv(clientfd, buf, BUFSIZ, 0); //receive data from client.
         
+        // int bytes_read = recv(clientfd, buf, BUFSIZ, 0);//receive data from client.
         if (bytes_read == 0)
         {
+            free(buf);
             break; 
         } 
         
@@ -117,6 +119,7 @@ int connection()
     if (socketfd == -1){
         handle_error("socket");
     }
+
     if(bind(socketfd, (struct sockaddr*) &addr, sizeof(struct sockaddr_in)) == -1) //bind socket to properties
     {   
         handle_error("bind");
