@@ -17,7 +17,7 @@
 #define DEBUG 1
 
 #define NUM_FUNCTIONS 6
-#define BFBuffer_Size 5000
+#define BFBuffer_Size 500000
 
 int diff, i, index_m, num_words, read_length;
 

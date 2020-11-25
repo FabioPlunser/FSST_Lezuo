@@ -12,24 +12,66 @@
 012) Write a query to get the first 3 characters of first name from employees table.
 013) Write a query to calculate 171*214+625.
 014) Write a query to get the first 3 characters of first name from employees table.
+Not the same as solution
+select length(first_name), length(last_name) from employees;
+
 015) Write a query to get first name from employees table after removing white spaces from both side.
 016) Write a query to get the length of the employee names (first_name, last_name) from employees table.
+Need to be first_name, last_name, then sum of both lengths:
+select first_name, last_name,  length(first_name)+length(last_name) from employees;
+
+
 017) Write a query to select first 10 records from a table.
+Needs to be employ_id and firstname: 
+select employee_id, first_name from employees limit 10;
+
+
 018) Write a query to get monthly salary (round 2 decimal places) of each and every employee? (Assume the salary field provides the 'annual salary' information.)
+Needs to bee first_name, last-Name and monthly salary:
+select first_name, last_name, round(salary/12, 2) from employees;
+
 019) Write a query to display the names (first_name, last_name) and salary for all employees whose salary is not in the range $10,000 through $15,000.
+
 020) Write a query to display the names (first_name, last_name) and department ID of all employees in departments 30 or 100 in ascending alphabetical order by department ID.
+
 021) Write a query to display the names (first_name, last_name) and salary for all employees whose salary is not in the range $10,000 through $15,000 and are in department 30 or 100.
+wrong info need firstname, lastname, salary and department id:
+select first_name, last_name, salary, department_id from employees where department_id=30 or department_id=100 and salary not between 10000 and 15000;
+
 022) Write a query to display the first_name of all employees who have both an "b" and "c" in their first name.
+
 023) Write a query to display the last name, job, and salary for all employees whose job is that of a Programmer or a Shipping Clerk, and whose salary is not equal to $4,500, $10,000, or $15,000.
+Job_id not job
+
+
 024) Write a query to display the last names of employees whose names have exactly 6 characters.
+
 025) Write a query to display the last names of employees having 'e' as the third character.
+
 026) Write a query to display the jobs/designations available in the employees table.
+not all jobs but distinct jobs
+
 027) Write a query to get the maximum salary of an employee working as a Programmer.
+
+
 028) Write a query to get the average salary and number of employees working the department 90.
+
 029) Write a query to get the highest, lowest, sum, and average salary of all employees.
+need to round all numbers for correct solution
+
 030) Write a query to get the number of employees with the same job.
+
 031) Write a query to get the difference between the highest and lowest salaries.
+
 032) Write a query to find the manager ID and the salary of the lowest-paid employee for that manager.
+Need to be ordered by salary and descending not clear,
+select manager_id, min(salary) from employees group by manager_id order by salary desc;
+
 033) Write a query to get the department ID and the total salary payable in each department.
+
+
 034) Write a query to get the average salary for each job ID excluding programmer.
+need to get job_id and average_salary
+
 035) Write a query to get the total salary, maximum, minimum, average salary of employees (job ID wise), for department ID 90 only.
+what is ment with job id wise

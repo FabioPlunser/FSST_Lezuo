@@ -1,0 +1,1 @@
+select count(employee_ID) from employees;

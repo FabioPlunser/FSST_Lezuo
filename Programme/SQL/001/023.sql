@@ -1,0 +1,1 @@
+select employees.last_name, jobs.job_id, employees.salary from employees join jobs on employees.job_id = jobs.job_id where (jobs.job_id = "IT_PROG" or jobs.job_id = "SH_CLERK") and not(employees.salary = 4500 or employees.salary=10000 or employees.salary = 15000);

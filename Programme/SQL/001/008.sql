@@ -1,0 +1,1 @@
+select avg(salary), count(employee_ID) from employees;
