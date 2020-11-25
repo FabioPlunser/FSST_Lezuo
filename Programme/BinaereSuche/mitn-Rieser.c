@@ -82,7 +82,7 @@ void * create_buffer(){
 
         int wortbuffer;
 
-        wortbuffer = open(".wortbuffer", O_RDONLY);
+        wortbuffer = open("wortbuffer", O_RDONLY);
         if (wortbuffer == -1)
         {
             perror("open");

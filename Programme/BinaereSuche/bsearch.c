@@ -18,11 +18,10 @@
 
 #define BFBuffer_Size 5000000
 
-int read_length;
-int i=0;
-void* create_buffer()
+int index_m = 0;
+char** create_buffer()
 {
-    int wortbuffer;
+    int wortbuffer, read_length, i;
     void* BFBuffer = malloc(BFBuffer_Size); 
 
     wortbuffer = open("wortbuffer", O_RDONLY);
@@ -33,75 +32,31 @@ void* create_buffer()
     
     read_length = read(wortbuffer, BFBuffer, BFBuffer_Size); //writing buffer with 20 Bytes at a time didn't work at all, because the seperation of the word got erased
     
-    return BFBuffer;
-}
-
-int comparfunction(const void * a, const void * b){
+    char** search_index = malloc(read_length);
+    search_index[0] = BFBuffer;
     
-    char* hallo = *((char**)b);
-    printf("Comparefunction: 1:%s, 2:%s\n", (char*)a, hallo);
-    return strcmp((char*)a, hallo);
-    
-}
-
-void** makelist(void* BFBuffer)
-{
-    void** test = malloc(BFBuffer_Size);
-    test[0] = BFBuffer;
-    
-    for(int x=0; x<BFBuffer_Size; x++)
+    for(int x=0; x<read_length; x++)
     {
         if (*((char*)BFBuffer+x) == 0)
         {
-            test[++i] = BFBuffer+(++x);
+            search_index[++i] = BFBuffer+(++x);
+            index_m++;
         }
     }
-    return test; 
-}
-
-
-
-void* bsearch_meins (const void *__key, const void *__base, size_t __nmemb, size_t __size, __compar_fn_t __compar)
-{
-  size_t __l, __u, __idx;
-  const void *__p;
-  int __comparison;
-
-  __l = 0;
-  __u = __nmemb;
-  while (__l < __u)
-    {
-      __idx = (__l + __u) / 2;
-      // __p = (void *) (((const char *) __base) + (__idx * __size)); geht nicht
-      __p = (void *) (((const char **) __base) + (__idx * __size));
-      __comparison = (*__compar) (__key, __p);
-      if (__comparison < 0)
-	__u = __idx;
-      else if (__comparison > 0)
-	__l = __idx + 1;
-      else
-	return (void *) __p;
-    }
-
-  return NULL;
-}
-
-
-
-void* compare(char* input, void* BFBuffer)
-{
-    void** test = makelist(BFBuffer);
-    printf("%i\n", i);
+    printf("%i\n", index_m);
+    return search_index; 
     
-    void* found = bsearch_meins(input,  test, i, 1, comparfunction);
-   
-    return found;   
 }
 
-
+int comparfunction(const void * a, const void * b){
+    printf("Comparefunction: 1:%s, 2:%s\n", (char*)a, (char*)b);
+    return strcmp((char*)a,*((char**)b));
+    
+}
 
 int main()
 {
+    char** search_index = create_buffer(); //get wordfile into a very big buffer
     for(;;)
     {
         char input[100];
@@ -111,14 +66,12 @@ int main()
 
         if(!strlen(input)) break;
 
-        void* BFBuffer = create_buffer(); //get wordfile into a very big buffer
         struct timeval tv_begin, tv_end, tv_diff;
     
         gettimeofday(&tv_begin, NULL); //get time before finding word
+        // void* res = compare(input, BFBuffer);
+        void* res = bsearch(input, search_index, index_m*sizeof(char*), sizeof(char*), comparfunction);
         
-        void* res = compare(input, BFBuffer);
-        
-
         gettimeofday(&tv_begin, NULL); //get time after finding word
 
         timersub(&tv_end, &tv_begin, &tv_diff); //subtract times to get the time how long it took

@@ -22,7 +22,7 @@
 int diff = 1;
 int i=0;
 
-void** create_search_index()
+char** create_search_index()
 {
     int wortbuffer, read_length;
     void* BFBuffer = malloc(BFBuffer_Size); 
@@ -36,7 +36,7 @@ void** create_search_index()
     read_length = read(wortbuffer, BFBuffer, BFBuffer_Size); //writing buffer with 20 Bytes at a time didn't work at all, because the seperation of the word got erased
     
     printf("Make List\n");
-    void** search_index = malloc(read_length);
+    char** search_index = malloc(read_length);
     search_index[i] = BFBuffer;
     
     for(int x=0; x<read_length; x++)
@@ -46,8 +46,7 @@ void** create_search_index()
             search_index[++i] = BFBuffer+(++x);
             // printf("%s, %i\n", (char*)search_index[i], i)
             
-        }
-        
+        }        
     }
     return search_index;
 }
