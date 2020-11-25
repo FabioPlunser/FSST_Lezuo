@@ -126,7 +126,6 @@ int index_m = 0;
 //recursive V2 with list
 void* compare(char* input, void** search_index, int number_of_words)
 {   
-	
     int jump_distance = number_of_words/2;
 
 	int moin = diff;

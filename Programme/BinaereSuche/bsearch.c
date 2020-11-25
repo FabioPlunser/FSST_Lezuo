@@ -18,12 +18,12 @@
 
 #define BFBuffer_Size 5000000
 
-int index_m = 0;
-char** create_buffer()
-{
-    int wortbuffer, read_length, i;
-    void* BFBuffer = malloc(BFBuffer_Size); 
 
+
+int get_read_length(char* BFBuffer)
+{
+    int wortbuffer, read_length;
+    
     wortbuffer = open("wortbuffer", O_RDONLY);
     if (wortbuffer == -1)
     {
@@ -32,7 +32,22 @@ char** create_buffer()
     
     read_length = read(wortbuffer, BFBuffer, BFBuffer_Size); //writing buffer with 20 Bytes at a time didn't work at all, because the seperation of the word got erased
     
-    char** search_index = malloc(read_length);
+    return read_length;
+}
+
+int makelist(char* BFBuffer, char** search_index, int read_length)
+{
+    int wortbuffer, i=0;
+    
+    wortbuffer = open("wortbuffer", O_RDONLY);
+    if (wortbuffer == -1)
+    {
+        perror("open");
+    }
+    
+    read_length = read(wortbuffer, BFBuffer, BFBuffer_Size); //writing buffer with 20 Bytes at a time didn't work at all, because the seperation of the word got erased
+    
+    // char** search_index = malloc(read_length);
     search_index[0] = BFBuffer;
     
     for(int x=0; x<read_length; x++)
@@ -40,23 +55,27 @@ char** create_buffer()
         if (*((char*)BFBuffer+x) == 0)
         {
             search_index[++i] = BFBuffer+(++x);
-            index_m++;
+            
         }
     }
-    printf("%i\n", index_m);
-    return search_index; 
-    
+    return i; 
 }
 
 int comparfunction(const void * a, const void * b){
-    printf("Comparefunction: 1:%s, 2:%s\n", (char*)a, (char*)b);
-    return strcmp((char*)a,*((char**)b));
-    
+    printf("Comparefunction: 1:%s, 2:%s\n", (char*)a, *((char**)b));
+    return strcmp((char*)a, *((char**)b));  
 }
 
 int main()
 {
-    char** search_index = create_buffer(); //get wordfile into a very big buffer
+    void* BFBuffer = malloc(BFBuffer_Size); 
+    int read_length = get_read_length(BFBuffer);
+    
+    char** search_index = malloc(read_length);
+    int numberword = makelist(BFBuffer, search_index, read_length);
+     
+    printf("%i\n", numberword);
+    //get wordfile into a very big buffer
     for(;;)
     {
         char input[100];
@@ -70,7 +89,7 @@ int main()
     
         gettimeofday(&tv_begin, NULL); //get time before finding word
         // void* res = compare(input, BFBuffer);
-        void* res = bsearch(input, search_index, index_m*sizeof(char*), sizeof(char*), comparfunction);
+        void* res = bsearch(input, search_index, numberword, sizeof(search_index), comparfunction);
         
         gettimeofday(&tv_begin, NULL); //get time after finding word
 

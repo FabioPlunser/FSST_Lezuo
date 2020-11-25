@@ -1,0 +1,1 @@
+select first_name as "First Name", last_name "Last Name"  from employees; 

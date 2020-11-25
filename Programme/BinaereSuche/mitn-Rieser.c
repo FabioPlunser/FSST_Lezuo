@@ -310,7 +310,7 @@ int main(){
         void* res = (*compare[function_pointer])((*((char **)search_index + search_index_pointer)), BFBuffer, search_index,num_words);
 
         #ifdef linux
-            gettimeofday(&tv_begin, NULL); //get time after finding word
+            gettimeofday(&tv_end, NULL); //get time after finding word
             timersub(&tv_end, &tv_begin, &tv_diff); //subtract times to get the time how long it took
             response_times[function_pointer] += tv_diff.tv_usec;
         #endif
