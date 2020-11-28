@@ -27,14 +27,13 @@
 char** compare(char* input, char** search_index, int lower_limit, int upper_limit, int number_of_words)
 {   
     
-    
     int middle = (lower_limit+((upper_limit-lower_limit)/2)); //get middle the middle of the buffer 
     printf("Middle: %i, upper_limit: %i, lower_limit: %i\n", middle, upper_limit, lower_limit); //printf for debugging
     int diff = strcmp(input, *(search_index+middle)); //compare Strings
 
-    if((middle==lower_limit) || (middle==upper_limit)) // wenn middle same as lower limit, search long enough
+    if((middle==lower_limit) || (middle==upper_limit)) // when middle same as lower limit, search long enough
     {
-        if(strcmp(input, *(search_index+middle)))   //then when strcmp not 0 return NULL because middle and lower limit are same when word is found,
+        if(strcmp(input, *(search_index+middle)) != 0)   //then when strcmp not 0 return NULL because middle and lower limit are same when word is found,
         {                                           //so extra step to get correctly return word
             return NULL;
         }
