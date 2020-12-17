@@ -1,3 +1,13 @@
+// Author: FabioPlunser //
+// Date: 24.10.2020 //
+// GIT-Repo: https://github.com/FabioPlunser/FSST_Lezuo
+// Specific Git-location: https://github.com/FabioPlunser/FSST_Lezuo/blob/main/Programme/BinaereSuche/BinaereSuche.c //
+// Compiled with make, in WSL using Ubuntu 20.0.4, as you can see in my Repo //
+
+// QuickSearch //
+
+//$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>

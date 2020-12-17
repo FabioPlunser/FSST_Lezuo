@@ -104,10 +104,6 @@ char** compare_all_functions(char* input, char** search_index, int lower_limit, 
 
     gettimeofday(&tv_begin, NULL);
     char** found_word = compare_binary_re(input,search_index, lower_limit,upper_limit, number_of_words);
-    if((char*)found_word == NULL)
-    {
-        return NULL;
-    }
     gettimeofday(&tv_end, NULL);
     timersub(&tv_begin, &tv_end, &tv_diff);
     printf("Recursive binary search found word: %s in (%li seconds %li  microseconds)\n", *found_word, tv_begin.tv_sec, tv_end.tv_usec);   //print time
@@ -115,20 +111,15 @@ char** compare_all_functions(char* input, char** search_index, int lower_limit, 
 
     gettimeofday(&tv_begin, NULL);
     found_word = bsearch(input, search_index, number_of_words, sizeof(search_index), comparfunction);
-    if((char*)found_word == NULL)
-    {
-        return NULL;
-    }
+    
     gettimeofday(&tv_end, NULL);
     timersub(&tv_begin, &tv_end, &tv_diff);
     printf("Bsearch found word: %s in (%li seconds %li  microseconds)\n", *found_word, tv_begin.tv_sec, tv_end.tv_usec);   //print time
 
     gettimeofday(&tv_begin, NULL);
     found_word = compare_linear(input,search_index, lower_limit,upper_limit, number_of_words);
-    if((char*)found_word == NULL)
-    {
-        return NULL;
-    }
+    
+    
     gettimeofday(&tv_end, NULL);
     timersub(&tv_begin, &tv_end, &tv_diff);
     printf("Linear search found word: %s in (%li seconds %li  microseconds)\n", *found_word, tv_begin.tv_sec, tv_end.tv_usec);   //print time

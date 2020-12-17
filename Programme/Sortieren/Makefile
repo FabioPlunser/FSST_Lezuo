@@ -1,5 +1,5 @@
 output:
-	gcc sortieren.c -o output
+	gcc quicksearch.c -o output
 
 clean: 
 	rm *.c

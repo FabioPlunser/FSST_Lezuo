@@ -17,7 +17,7 @@
 #define DEBUG 1
 
 #define NUM_FUNCTIONS 6
-#define BFBuffer_Size 500000
+#define BFBuffer_Size 5000
 
 int diff, i, index_m, num_words, read_length;
 
@@ -289,7 +289,7 @@ void* compare_binary_nrl(char* input, void* BFBuffer,void ** nc1, int nc2){
 int main(){
 
     int function_pointer = 0;
-    int search_index_pointer = 0;
+    int search_index_pointer = num_words-1;
     void* BFBuffer = create_buffer();
     void* search_index = create_search_index(BFBuffer);
 
@@ -297,7 +297,7 @@ int main(){
         struct timeval tv_begin, tv_end, tv_diff;
     #endif
 
-    while(search_index_pointer < num_words){
+    while(search_index_pointer > 1){
         // Reset Globals
         diff = 1;
         i = 2;
@@ -339,7 +339,7 @@ int main(){
         #endif
 
         if ((++function_pointer) >= NUM_FUNCTIONS){
-            search_index_pointer++;
+            search_index_pointer--;
             function_pointer = 0;
             printf("New Word : %s\n", (*((char **)search_index + search_index_pointer)));
         }
@@ -348,7 +348,7 @@ int main(){
     for (function_pointer = 0; function_pointer < NUM_FUNCTIONS;function_pointer++) {
         printf("Average Response Time of %s : %f\n",
                 function_names[function_pointer],
-                response_times[function_pointer]/search_index_pointer
+                response_times[function_pointer]/num_words
         );
     }
 
