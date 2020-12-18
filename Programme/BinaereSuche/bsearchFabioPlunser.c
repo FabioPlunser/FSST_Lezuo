@@ -13,10 +13,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/time.h>
+#include <sys/stat.h>
 #include <unistd.h> 
 #include <fcntl.h>
 
-#define BFBuffer_Size 5000000
 #define wordbuffer "wortbuffer"
 
 
@@ -134,16 +134,16 @@ char** create_search_index(char* input)
 {
     //set variables 
     int wortbuffer, read_length, i = 0;
-    char* BFBuffer = malloc(BFBuffer_Size); //tried to read wortbuffer with while, same as in file copy, didn't after trying for 2 hours so just read 
-                                            //5 million byte
 
     wortbuffer = open(wordbuffer, O_RDONLY);
     if (wortbuffer == -1)
     {
         perror("open");
     }
-    
-    read_length = read(wortbuffer, BFBuffer, BFBuffer_Size); //writing buffer with 20 Bytes at a time didn't work at all, because the seperation of the word got erased
+    struct stat fileStat;
+    printf("File Size: \t\t%ld bytes\n",fileStat.st_size);
+    char* BFBuffer = malloc(fileStat.st_size);
+    read_length = read(wortbuffer, BFBuffer, fileStat.st_size); //writing buffer with 20 Bytes at a time didn't work at all, because the seperation of the word got erased
     
     close(wortbuffer);
 

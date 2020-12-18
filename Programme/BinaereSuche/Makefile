@@ -1,15 +1,25 @@
+
+BIN_NAME=bin
+
+
 all: bsearchFabioPlunser Rieser_compare_all_functions 
 
-
-bsearchFabioPlunser: bsearchFabioPlunser.c
-	gcc bsearchFabioPlunser.c -o output
-Rieser_compare_all_functions: Rieser_compare_all_functions.c
-	gcc Rieser_compare_all_functions.c -o rieser
-
 bsearch: bsearchBenchmark.c GNUPLOT/usage.plot 
-	gcc bsearchBenchmark.c -o bin 
-	./bin
+	gcc $* -o $(BIN_NAME) 
+	./$(BIN_NAME)
 	gnuplot GNUPLOT/usage.plot 
+
+plot: GNUPLOT/usage.plot usage.csv
+ifeq ("$(end)","")
+	$(eval END_NUM=$(end))
+else
+	$(eval END_NUM=7)
+endif
+	gnuplot -e "start=2;end=$(END_NUM)" GNUPLOT/usage.plot
+
+%:%.c
+	gcc $* -o $(BIN_NAME)
+	./$(BIN_NAME)
 
 clean:
 	rm output rieser

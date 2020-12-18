@@ -9,12 +9,13 @@
 
 #define DEBUG 1
 
-#define NUM_SAMPLES 10
+#define NUM_SAMPLES 50
 
 #define START_WORD 0
-#define END_WORD 90000
-#define STEP_SIZE 200
+#define END_WORD 130800
+#define STEP_SIZE 100
 
+#define START_FUNCTION 0
 #define NUM_FUNCTIONS 6
 #define BUFFER_SIZE 4725872
 #define NUM_WORDS 356008
@@ -33,6 +34,8 @@ void* compare_binary_nrl(char* input, void* nc1,void ** search_index, int nc2);
 double response_times[NUM_FUNCTIONS] = {0,0,0,0,0,0};
 char* function_names[NUM_FUNCTIONS] = {"Linaer Not Recursive List","Linear Recursive List","Binary Not Recursive","Binary Not Recursive with List","Binary Recursive","Binary Recursive with List"};
 void* (* compare[NUM_FUNCTIONS])(char*,void*,void**,int) = {&compare_linear_rl,&compare_linear_nrl,&compare_binary_nr,&compare_binary_nrl,&compare_binary_r,&compare_binary_rl};
+
+double faktor[NUM_FUNCTIONS]={50,50,1,1,1,1};
 
 void** create_search_index(void * BFBuffer){
 
@@ -174,9 +177,9 @@ void* compare_binary_r(char* input, void* BFBuffer,void ** nc1, int nc2){
         }
     }
 
-    index_m += word_correction;
-
     diff = strcmp(input, (char*)BFBuffer+index_m);
+    index_m += word_correction;
+    
     i = i*2;
 
     if(diff == 0) //if input word and Buffer word are the same reset variables and return word from buffer
@@ -225,23 +228,24 @@ void* compare_binary_rl(char* input, void * nc1, void** search_index, int number
 // bsearch
 int comparfunction(const void * a, const void * b){
 
-    int idx = 0;
-    char * str1 = (char *) a;
-    char * str2 = (char *) b;
+    return strcmp((char*)a, *((char**)b)); 
 
-    while ((*(str1+idx) != 0) & (*(str2+idx) != 0)) {
-        if (((*(str1+idx)) - (*(str2+idx))) != 0) {
-            return ((*(str1+idx)) - (*(str2+idx)));
-        }
-        idx ++;
-    }
-    return ((*(str1+idx)) - (*(str2+idx)));
+    // int idx = 0;
+    // char * str1 = (char *) a;
+    // char * str2 = (char *) b;
+
+    // while ((*(str1+idx) != 0) & (*(str2+idx) != 0)) {
+    //     if (((*(str1+idx)) - (*(str2+idx))) != 0) {
+    //         return ((*  (str1+idx)) - (*(str2+idx)));
+    //     }
+    //     idx ++;
+    // }
+    // return ((*(str1+idx)) - (*(str2+idx)));
 }
 
 void* compare_binary_nrl(char* input, void* nc1,void ** search_index, int nc2){
 
     void* found = bsearch(input,  search_index, num_words, sizeof(search_index), comparfunction);
-
     return found;
 }
 
@@ -259,7 +263,7 @@ int write_double(int file_handle,double number) {
 
     char * temp = malloc(20);
 
-    sprintf(temp,",%f",number);
+    sprintf(temp,",%-4.0f",number);
 
     return write(file_handle,temp,strlen(temp));
 
@@ -270,7 +274,7 @@ int write_double(int file_handle,double number) {
 int main(){
 
     int iLauf;
-    int function_pointer = 0;
+    int function_pointer = START_FUNCTION;
     int search_index_pointer = START_WORD;
     double temp_time;
 
@@ -278,10 +282,10 @@ int main(){
     void* BFBuffer = create_buffer();
     void* search_index = create_search_index(BFBuffer);
 
-    int csv = open("usage.csv", (O_RDWR && O_TRUNC) | O_CREAT, 0644);
+    int csv = open("usage.csv", (O_RDWR | O_TRUNC) | O_CREAT, 0644);
     if (csv == -1){perror("open");}
     write(csv,HEADER,strlen(HEADER));
-    for (iLauf = 0;iLauf < NUM_FUNCTIONS;iLauf++){
+    for (iLauf = 0;(iLauf+function_pointer) < NUM_FUNCTIONS;iLauf++){
         write(csv,",",1);
         write(csv,function_names[function_pointer+iLauf],strlen(function_names[function_pointer+iLauf]));
     }
@@ -292,9 +296,16 @@ int main(){
 
     while(1){
 
+        if(search_index_pointer>END_WORD)
+        {
+            break;
+        }
         // Get multiple Samples for each Word per Function
         for (iLauf = 0;iLauf < NUM_SAMPLES;iLauf ++){
-
+            if(search_index_pointer>END_WORD)
+            {
+                break;
+            }
             // Reset Globals
             diff = 1;
             i = 2;
@@ -311,7 +322,7 @@ int main(){
 
         }
 
-        temp_time = temp_time / NUM_SAMPLES;
+        temp_time = (temp_time * 1000) / ( faktor[function_pointer] * NUM_SAMPLES);
 
         write_double(csv,temp_time);
 
@@ -329,9 +340,8 @@ int main(){
 
         if (++function_pointer >= NUM_FUNCTIONS){
             search_index_pointer += STEP_SIZE;
-            printf("Da Hasi stinkt: %i\n", search_index_pointer);
             if ((search_index_pointer < END_WORD)){
-                function_pointer = 0;
+                function_pointer = START_FUNCTION;
                 write(csv,"\r\n",2);
                 write_int(csv,search_index_pointer);
                 printf("New Word : %s\n", (*((char **)search_index + search_index_pointer)));
@@ -344,7 +354,7 @@ int main(){
 
     printf("\n\n");
 
-    for (function_pointer = 0; function_pointer < NUM_FUNCTIONS;function_pointer++) {
+    for (function_pointer = START_FUNCTION; function_pointer < NUM_FUNCTIONS;function_pointer++) {
         printf("Average Response Time of %s : %f\n",
                 function_names[function_pointer],
                 response_times[function_pointer]/((END_WORD-START_WORD)/STEP_SIZE)
