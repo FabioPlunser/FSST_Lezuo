@@ -22,5 +22,5 @@ set style data line
 # title columnheader  Use the column headers (first row) as titles
 # linewidth 4         Use a wider line width
 #
-plot for [i=start:end] 'usage.csv' using i:xtic(1) title columnheader linewidth 4
+plot for [i=2:7] 'usage.csv' using i:xtic(1) title columnheader linewidth 4
 pause -1 "Hit any key to continue\n"

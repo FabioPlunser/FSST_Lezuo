@@ -9,11 +9,11 @@
 
 #define DEBUG 1
 
-#define NUM_SAMPLES 50
+#define NUM_SAMPLES 10
 
 #define START_WORD 0
 #define END_WORD 130800
-#define STEP_SIZE 100
+#define STEP_SIZE 50
 
 #define START_FUNCTION 0
 #define NUM_FUNCTIONS 6
@@ -35,7 +35,7 @@ double response_times[NUM_FUNCTIONS] = {0,0,0,0,0,0};
 char* function_names[NUM_FUNCTIONS] = {"Linaer Not Recursive List","Linear Recursive List","Binary Not Recursive","Binary Not Recursive with List","Binary Recursive","Binary Recursive with List"};
 void* (* compare[NUM_FUNCTIONS])(char*,void*,void**,int) = {&compare_linear_rl,&compare_linear_nrl,&compare_binary_nr,&compare_binary_nrl,&compare_binary_r,&compare_binary_rl};
 
-double faktor[NUM_FUNCTIONS]={50,50,1,1,1,1};
+double faktor[NUM_FUNCTIONS]={25,25,1,1,1,1};
 
 void** create_search_index(void * BFBuffer){
 
