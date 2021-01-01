@@ -352,7 +352,7 @@ int main(){
 
     }
 
-    printf("\n\n");
+    // printf("\n\n");
 
     for (function_pointer = START_FUNCTION; function_pointer < NUM_FUNCTIONS;function_pointer++) {
         printf("Average Response Time of %s : %f\n",

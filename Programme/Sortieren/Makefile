@@ -1,5 +1,5 @@
-output:
-	gcc quicksearch.c -o output
+quicksort:
+	gcc quicksort.c -o quicksort
 
 clean: 
 	rm *.c
