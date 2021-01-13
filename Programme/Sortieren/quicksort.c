@@ -22,10 +22,9 @@
 #include <unistd.h>
 
 
-#include "quicksort.h"
-#include "bubblesort.h"
+#include "searches.h"
 
-#define HEADER "Index, DIY Quicksort, qsort*1000, bubblesort*1000"
+#define HEADER "Index, DIY Quicksort, qsort, bubblesort"
 // creates a array of size size and fills it with random ints in range 0 to max_int
 int *create_array(int MAX_VALUE)
 {
@@ -58,47 +57,41 @@ void benchmark(int MAX_VALUE, int meassurepoints)
 		
 	
 	int i;
-	int* array;
-	int* array2;
-	int* array3;
+	int *array;
 	printf("Time Values\n");
 	for(i = 1; i <= meassurepoints; i++)
 	{
 		array = create_array(MAX_VALUE);
-		array2 = array;
-		array3 = array;
-
-
-		sprintf(data, "%i,", i);
-		write(csv, data, strlen(data));
-
 		gettimeofday(&tv_begin, NULL);
 		qs(array, 0, MAX_VALUE);
 		gettimeofday(&tv_end, NULL);
 		timersub(&tv_end, &tv_begin, &tv_diff);
 		sprintf(quicksort, "%ld,", tv_diff.tv_usec);
+	
+		array = create_array(MAX_VALUE);
+		gettimeofday(&tv_begin, NULL);
+		qsort(array, MAX_VALUE, sizeof(MAX_VALUE), cmpfunc);
+		gettimeofday(&tv_end, NULL);
+		timersub(&tv_end, &tv_begin, &tv_diff);
+		sprintf(qsortdata, "%ld,", tv_diff.tv_usec);
+		
+		array = create_array(MAX_VALUE);
+		gettimeofday(&tv_begin, NULL);
+		bsort(array, MAX_VALUE);
+		gettimeofday(&tv_end, NULL);
+		timersub(&tv_end, &tv_begin, &tv_diff);
+		sprintf(bubblesort, "%ld,", tv_diff.tv_usec);
+		
+		sprintf(data, "%i,", i);
+		write(csv, data, strlen(data));
 		write(csv, quicksort, strlen(quicksort));
 		printf("DIY Qsort: %s", quicksort);
-
-		gettimeofday(&tv_begin, NULL);
-		qsort(array2, MAX_VALUE, sizeof(MAX_VALUE), cmpfunc);
-		gettimeofday(&tv_end, NULL);
-		timersub(&tv_end, &tv_begin, &tv_diff);
-		sprintf(qsortdata, "%ld,", tv_diff.tv_usec*1000);
 		write(csv, qsortdata, strlen(qsortdata));
 		printf("Qsort: %s", qsortdata);
-		
-		gettimeofday(&tv_begin, NULL);
-		bsort(array3, MAX_VALUE);
-		gettimeofday(&tv_end, NULL);
-		timersub(&tv_end, &tv_begin, &tv_diff);
-		sprintf(bubblesort, "%ld,", tv_diff.tv_usec*1000);
 		write(csv, bubblesort, strlen(bubblesort));
 		printf("BubbleSort: %s\n", bubblesort);
 		write(csv, "\n", 1);
-	}
-	
-		
+	}	
 }
 int main(int argc, char **argv)
 {
