@@ -9,7 +9,7 @@ int partition(int *array, int us, int os, int pivot)
 {	
 	while(us<os){
 		while((array[us]<=array[pivot])&&(us<os)) us++;
-		while(array[os]>array[pivot]) os--;
+		while((array[os]>=array[pivot])&&(os>us)) os--;
 		if(us<os) swap(&array[us], &array[os]);	
 	}
 	swap(&array[pivot], &array[os]);
@@ -26,40 +26,6 @@ void qs(int *array, int us, int os)
 		qs(array, pivot+1, pivot);
 	}
 }
-
-// int partition(int *a, int us, int os)
-// {
-// 	int i, piv;
-
-// 	/* set pivot */
-// 	piv = a[os];
-// 	i = us - 1;
-
-// 	for(int j = us; j < os; j++)
-// 	{
-// 		if(a[j] < piv)
-// 		{
-// 			i++;
-// 			swap(&a[i], &a[j]);
-// 		}
-// 	}
-// 	swap(&a[i+1], &a[os]);
-
-// 	return (i+1);
-// }
-// void qs(int *a, int us, int os)
-// {
-// 	int pi;
-
-// 	if(us < os)
-// 	{
-// 		pi = partition(a, us, os);
-
-// 		qs(a, us, pi-1);
-// 		qs(a, pi+1, os);
-// 	}
-// }
-
 
 void bsort(int *a, int n)
 {

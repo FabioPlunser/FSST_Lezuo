@@ -17,6 +17,7 @@
 
 #define START_FUNCTION 0
 #define NUM_FUNCTIONS 6
+
 #define BUFFER_SIZE 4725872
 #define NUM_WORDS 356008
 

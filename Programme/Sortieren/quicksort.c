@@ -93,6 +93,7 @@ void benchmark(int MAX_VALUE, int meassurepoints)
 		write(csv, "\n", 1);
 	}	
 }
+
 int main(int argc, char **argv)
 {
 	int MAX_VALUE, meassurepoints;
