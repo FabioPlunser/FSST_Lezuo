@@ -1,0 +1,4 @@
+\babel@toc {ngerman}{}
+\contentsline {section}{\numberline {1}Angabe}{1}{section.1}%
+\contentsline {section}{\numberline {2}Lösung}{2}{section.2}%
+\contentsline {section}{\numberline {3}Ergebnisse}{2}{section.3}%

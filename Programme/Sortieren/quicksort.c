@@ -21,11 +21,10 @@
 #include <fcntl.h>
 #include <unistd.h>
 
-
-#include "searches.h"
-
 #define HEADER "Index, DIY Quicksort, qsort, bubblesort"
 // creates a array of size size and fills it with random ints in range 0 to max_int
+void qs(int *array, int us, int os);
+void bsort(int *a, int n);
 int *create_array(int MAX_VALUE)
 {
 	int *array = (int*)malloc(MAX_VALUE * sizeof(int));
@@ -65,6 +64,12 @@ void benchmark(int MAX_VALUE, int meassurepoints)
 		gettimeofday(&tv_begin, NULL);
 		qs(array, 0, MAX_VALUE);
 		gettimeofday(&tv_end, NULL);
+		printf("DIY Qsort: Sorted Array:\n");
+		for(int i=0; i<MAX_VALUE; i++)
+		{
+			printf("%i,", array[i]);
+		}
+		printf("\n\n");
 		timersub(&tv_end, &tv_begin, &tv_diff);
 		sprintf(quicksort, "%ld,", tv_diff.tv_usec);
 	
@@ -72,6 +77,12 @@ void benchmark(int MAX_VALUE, int meassurepoints)
 		gettimeofday(&tv_begin, NULL);
 		qsort(array, MAX_VALUE, sizeof(MAX_VALUE), cmpfunc);
 		gettimeofday(&tv_end, NULL);
+		printf("QSort: Sorted Array:\n");
+		for(int i=0; i<MAX_VALUE; i++)
+		{
+			printf("%i,", array[i]);
+		}
+		printf("\n\n");
 		timersub(&tv_end, &tv_begin, &tv_diff);
 		sprintf(qsortdata, "%ld,", tv_diff.tv_usec);
 		
@@ -79,17 +90,23 @@ void benchmark(int MAX_VALUE, int meassurepoints)
 		gettimeofday(&tv_begin, NULL);
 		bsort(array, MAX_VALUE);
 		gettimeofday(&tv_end, NULL);
+		printf("BubbleSort: Sorted Array:\n");
+		for(int i=0; i<MAX_VALUE; i++)
+		{
+			printf("%i,", array[i]);
+		}
+		printf("\n\n");
 		timersub(&tv_end, &tv_begin, &tv_diff);
 		sprintf(bubblesort, "%ld,", tv_diff.tv_usec);
 		
 		sprintf(data, "%i,", i);
 		write(csv, data, strlen(data));
 		write(csv, quicksort, strlen(quicksort));
-		printf("DIY Qsort: %s", quicksort);
+		printf("DIY Qsort: %sus, " , quicksort);
 		write(csv, qsortdata, strlen(qsortdata));
-		printf("Qsort: %s", qsortdata);
+		printf("Qsort: %sus, ", qsortdata);
 		write(csv, bubblesort, strlen(bubblesort));
-		printf("BubbleSort: %s\n", bubblesort);
+		printf("BubbleSort: %sus\n", bubblesort);
 		write(csv, "\n", 1);
 	}	
 }

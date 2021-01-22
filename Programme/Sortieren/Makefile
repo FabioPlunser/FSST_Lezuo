@@ -1,8 +1,9 @@
-quicksort:
-	gcc quicksort.c -o quicksort
+quicksort: quicksort.c searches.c
+	gcc quicksort.c searches.c -o quicksort
+	./quicksort
 
-benchmark: quicksort.c usage.plot 
-	gcc quicksort.c -o quicksort
+benchmark: quicksort.c searches.c usage.plot 
+	gcc quicksort.c searches.c -o quicksort
 	./quicksort
 	gnuplot usage.plot 
 
