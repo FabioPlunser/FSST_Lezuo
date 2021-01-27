@@ -1,10 +1,10 @@
 \newpage
 \section{Angabe}
-    Implementieren Sie Quicksort (https://de.wikipedia.org/wiki/Quicksort) für arrays mit integern. Testen und Messen sie die Zeiten mit 10, 100, 1000, 10000, 100000 Elementen.
+    Implementieren Sie Quicksort (https://de.wikipedia.org/wiki/Quicksort) für arrays mit integern. Testen und Messen sie die Zeiten mit 10, 100, 1000, 10000, 100000 Elementen.\\
 
-    Bonus Aufgabe: Messreihe und Vergleich mit Bubblesort, messen gegen qsort(3) aus der C Bibliothek.
+    \noindent Bonus Aufgabe: Messreihe und Vergleich mit Bubblesort, messen gegen qsort(3) aus der C Bibliothek.
 
-    \begin{lstlisting}[language=C, style=CStyle, caption=init-CLOCK, captionpos=b, label=init-CLOCK]
+    \begin{lstlisting}[language=C, style=CStyle, caption=Gegebener-Code, captionpos=b, label=init-CLOCK]
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -53,48 +53,13 @@ int main(int argc, char **argv)
     Bublesort wurde aus einem alten Projekt herausgenommen.\\   
     \textbf{Der Code mit Makefile ist in dem extra Zip Ordner oder auf GitHub zu finden: \url{https://github.com/FabioPlunser/FSST_Lezuo/tree/main/Programme/Sortieren}}
 \section{Ergebnisse}
-    Alle Ergebnisse wurden mit der entsprechenden Größe des Arrays und dies 100mal sortiert, für quasi 100 Messpunkte.
-    Ebenfalls erhört sich die höchste Zahl im Array proportional zur größe des Arrays, somit ist bei einer Array Größe von 1000 die höchste
-    Zahl auch 1000.
-    
+    Der Plot hat die Größe des Arrays auf der X-Achse und die Zeitdauer auf der Y-Achse. 
+
     \begin{figure}[!htb]
         \centering
-        \includegraphics[width=\linewidth]{Sortieren-10.png}
-        \caption{Sortieren-10}
-        \label{caption:Sortieren-10}
+        \includegraphics[width=\linewidth]{Plot-Ergebnis-max-1000.png}
+        \caption{Plot-Ergebnis-max-1000}
+        \label{caption:Plot-Ergebnis-max-1000}
     \end{figure}
-    
-\newpage
-    \begin{figure}[!htb]
-        \centering
-        \includegraphics[width=\linewidth]{Sortieren-100.png}
-        \caption{Sortieren-100}
-        \label{caption:Sortieren-100}
-    \end{figure}
-    
-    \begin{figure}[!htb]
-        \centering
-        \includegraphics[width=\linewidth]{Sortieren-1000.png}
-        \caption{Sortieren-1000}
-        \label{caption:Sortieren-1000}
-    \end{figure}
-    
-\newpage
-    \begin{figure}[!htb]
-        \centering
-        \includegraphics[width=\linewidth]{Sortieren-10000.png}
-        \caption{Sortieren-10000}
-        \label{caption:Sortieren-10000}
-    \end{figure}
-    
-    \begin{figure}[!htb]
-        \centering
-        \includegraphics[width=\linewidth]{Sortieren-100000.png}
-        \caption{Sortieren-100000}
-        \label{caption:Sortieren-100000}
-    \end{figure}
-    
-\newpage
-    \noindent Man sieht, das BubleSort immer langsamer wird bei einer Array Größe von 1000 Zahlenwerten benötigt es schon ca. $2500\mu s = 0,0025s$\\
-    Bei einer Anzahl von 10000 Werten sind es schon $250000\mu s = 0,25$. Das sind über 4 Minuten.\\
-    Bei einer Array Größe von 100000 schwank BubleSort sehr stark von einmal gleich schnell wie QSort bis zu $900000\mu s = 0,9$.
+
+    \noindent Man sieht, dass Bubblesort bei zunehmender Größe des Arrays immer länger Zeit benötigt, wo die anderen Algorithmen immer ungefähr gleich lang brauchen. 
