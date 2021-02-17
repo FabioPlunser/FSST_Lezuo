@@ -8,6 +8,8 @@
 
 //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
+//Basierend auf http://www.firmcodes.com/how-do-aes-128-bit-cbc-mode-encryption-c-programming-code-openssl/
+//und 
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
