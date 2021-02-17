@@ -11,7 +11,7 @@ int partition(int *a, int us, int os, int i, int j,  int pivot)
 	while(i<j)
 	{
 		while ((i<os)&&(a[i]<pivot))i++;
-		while ((j>us)&&(a[j]>=pivot))j--;
+		while ((j>us)&&(a[j]>=pivot)&&(us<os))j--;
 		if (i < j) swap(&a[j], &a[i]);
 	}
 	if (a[i] > pivot) swap(&a[os], &a[i]);

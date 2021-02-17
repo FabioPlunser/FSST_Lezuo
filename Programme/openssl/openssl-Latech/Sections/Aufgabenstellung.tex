@@ -1,0 +1,33 @@
+\newpage
+\section{Aufgabenstellung}
+    \begin{lstlisting}[language=Python, style=Stylepython, caption=Angabge, captionpos=b, label=Angabge]
+# deciphers to "Schoene Crypto Welt" with IV=BBBBBBBBBBBBBBBB and key=BBBBBBBBBBBBBBBB aes128-cbc
+cyphertext = "AAE365272C81078AB6116B361831D0F6A5D3C8587E946B530B7957543107F15E"
+bc = binascii.unhexlify(cyphertext)
+data = b'D' + bytes([len(bc)]) + binascii.unhexlify(cyphertext) + b'X'  
+\end{lstlisting}
+    
+\noindent  Der cyphertext soll entschlüsselt \anfuehrung{Schöne Crypto Welt} bedeuten. 
+Um dies zu überprüfen kann \href{OpenSSL}{https://www.openssl.org/} verwendet werden.\\
+
+\noindent Schreiben Sie ein Programm das unter Verwendnung von openssl obige Aussage überprüft, 
+verbessen Sie ihr Program in dem Sinne dass sie key/iv/plaintexte/ciphertexte als Argumente/Dateien/Usereingaben verarbeiten.
+
+\subsection*{Hinweise}
+\begin{itemize}
+    \item Sie benötigen die openssl Biblotheksheader, unter Ubuntu 20.04 können Sie diese installieren via:
+    \begin{lstlisting}[language=Python, style=Stylepython, caption=Angabge, captionpos=b, label=Angabge]
+$ sudo apt install libssl-dev
+    \end{lstlisting}
+    
+    \item em Linker muss mitgeteilt werden dass sie in Ihrem Programm Funktionen verwenden die in einer externen Bibliothek bereit liegen, verwenden 
+    sie dazu das flag -l (klein-L) und den Namen der Bibliothek OHNE das führende lib. 
+    openssl besteht aus mehreren Bibliotheken, die für AES notwendingen Funktionen befinden sich in libcrypto.
+    \begin{lstlisting}[language=Python, style=Stylepython, caption=Angabge, captionpos=b, label=Angabge]
+$ gcc my_code.c -lbibliothek -o my_executable
+    \end{lstlisting}
+    Sie können sich die gelinkten Bibliotheken dann via ldd Kommando ansehen
+    \begin{lstlisting}[language=Python, style=Stylepython, caption=Angabge, captionpos=b, label=Angabge]
+$ ldd my_executable
+    \end{lstlisting}
+\end{itemize}

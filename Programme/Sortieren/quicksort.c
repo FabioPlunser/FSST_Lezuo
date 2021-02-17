@@ -31,7 +31,7 @@ int *create_array(int MAX_VALUE)
 
 	for (int i = 0; i < MAX_VALUE; i++)
 	{
-		array[i] = rand() % MAX_VALUE;
+		array[i] = rand() % 1000;
 	}
 	return array;
 }
@@ -40,7 +40,7 @@ int cmpfunc (const void * a, const void * b) {
    return ( *(int*)a - *(int*)b );
 }
 
-void benchmark(int MAX_VALUE, int meassurepoints)
+void benchmark(int MAX_VALUE)
 {
 	char quicksort[20];
 	char qsortdata[20];
@@ -61,74 +61,70 @@ void benchmark(int MAX_VALUE, int meassurepoints)
 	
 	for(int i = 10; i <= MAX_VALUE;)
 	{
-		for(int point = 0; i<=meassurepoints; i++ )
-		{
-			array = create_array(i);
-			gettimeofday(&tv_begin, NULL);
-			qs(array, 0, i);
-			gettimeofday(&tv_end, NULL);
-			printf("DIY Qsort: Sorted Array:\n");
-			for(int x=0; x<MAX_VALUE; x++)
-			{
-				printf("%i,", array[i]);
-			}
-			printf("\n\n");
-			timersub(&tv_end, &tv_begin, &tv_diff);
-			sprintf(quicksort, "%ld,", tv_diff.tv_usec);
+		array = create_array(i);
+		gettimeofday(&tv_begin, NULL);
+		qs(array, 0, i);
+		gettimeofday(&tv_end, NULL);
+		// printf("DIY Qsort: Sorted Array:\n");
+		// for(int x=0; x<MAX_VALUE; x++)
+		// {
+		// 	printf("%i,", array[i]);
+		// }
+		printf("\n\n");
+		timersub(&tv_end, &tv_begin, &tv_diff);
+		sprintf(quicksort, "%ld,", tv_diff.tv_usec);
+	
+		array = create_array(i);
+		gettimeofday(&tv_begin, NULL);
+		qsort(array, i, sizeof(i), cmpfunc);
+		gettimeofday(&tv_end, NULL);
+		// printf("QSort: Sorted Array:\n");
+		// for(int x=0; x<MAX_VALUE; x++)
+		// {
+		// 	printf("%i,", array[i]);
+		// }
+		printf("\n\n");
+		timersub(&tv_end, &tv_begin, &tv_diff);
+		sprintf(qsortdata, "%ld,", tv_diff.tv_usec);
 		
-			array = create_array(i);
-			gettimeofday(&tv_begin, NULL);
-			qsort(array, i, sizeof(i), cmpfunc);
-			gettimeofday(&tv_end, NULL);
-			printf("QSort: Sorted Array:\n");
-			for(int x=0; x<MAX_VALUE; x++)
-			{
-				printf("%i,", array[i]);
-			}
-			printf("\n\n");
-			timersub(&tv_end, &tv_begin, &tv_diff);
-			sprintf(qsortdata, "%ld,", tv_diff.tv_usec);
-			
-			array = create_array(i);
-			gettimeofday(&tv_begin, NULL);
-			bsort(array, i);
-			gettimeofday(&tv_end, NULL);
-			printf("BubbleSort: Sorted Array:\n");
-			for(int x=0; x<MAX_VALUE; x++)
-			{
-				printf("%i,", array[i]);
-			}
-			printf("\n\n");
-			timersub(&tv_end, &tv_begin, &tv_diff);
-			sprintf(bubblesort, "%ld,", tv_diff.tv_usec);
-			
-			sprintf(data, "%i,", i);
-			write(csv, data, strlen(data));
-			write(csv, quicksort, strlen(quicksort));
-			printf("DIY Qsort: %sus, " , quicksort);
-			write(csv, qsortdata, strlen(qsortdata));
-			printf("Qsort: %sus, ", qsortdata);
-			write(csv, bubblesort, strlen(bubblesort));
-			printf("BubbleSort: %sus\n", bubblesort);
-			write(csv, "\n", 1);
-		}
-		i=i*10;
+		array = create_array(i);
+		gettimeofday(&tv_begin, NULL);
+		bsort(array, i);
+		gettimeofday(&tv_end, NULL);
+		// printf("BubbleSort: Sorted Array:\n");
+		// for(int x=0; x<MAX_VALUE; x++)
+		// {
+		// 	printf("%i,", array[i]);
+		// }
+		printf("\n\n");
+		timersub(&tv_end, &tv_begin, &tv_diff);
+		sprintf(bubblesort, "%ld,", tv_diff.tv_usec);
+		
+		sprintf(data, "%i,", i);
+		write(csv, data, strlen(data));
+		write(csv, quicksort, strlen(quicksort));
+		// printf("DIY Qsort: %sus, " , quicksort);
+		write(csv, qsortdata, strlen(qsortdata));
+		// printf("Qsort: %sus, ", qsortdata);
+		write(csv, bubblesort, strlen(bubblesort));
+		// printf("BubbleSort: %sus\n", bubblesort);
+		write(csv, "\n", 1);
+		
+		i=i*1.5;
 	}	
 }
 
 int main(int argc, char **argv)
 {
-	int MAX_VALUE, meassurepoints;
+	int MAX_VALUE;
 	// create random ints based in current time
 	srand(time(NULL));
 	
 
 	printf("How many elements should the Array have?: ");
    	scanf("%d",&MAX_VALUE);
-	printf("How many measurement points?: ");
-   	scanf("%d",&meassurepoints);
-	
-	
-	benchmark(MAX_VALUE, meassurepoints);
+
+
+	benchmark(MAX_VALUE);
 	
 }

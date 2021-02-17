@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "ssl.h": "c",
+        "err.h": "c",
+        "stdio.h": "c"
+    }
+}
