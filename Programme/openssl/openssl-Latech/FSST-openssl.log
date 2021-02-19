@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 21.1) (preloaded format=pdflatex 2021.2.9)  17 FEB 2021 19:32
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 21.1) (preloaded format=pdflatex 2021.2.9)  17 FEB 2021 19:43
 entering extended mode
 **c:/Users/fplun/GoogleDrive/Schule/2020_21/FSST/FSST_Lezuo/Programme/openssl/openssl-Latech/FSST-openssl.tex
 (c:/Users/fplun/GoogleDrive/Schule/2020_21/FSST/FSST_Lezuo/Programme/openssl/openssl-Latech/FSST-openssl.tex
@@ -900,14 +900,38 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-16.55943pt}.
 
-[1] (C:\Users\fplun\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
+[1]
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 9.
+
+Overfull \hbox (24.05861pt too wide) in paragraph at lines 13--22
+\OT1/lmr/m/n/12 Beim \OT1/lmr/bx/n/12 Ad-van-ced En-cryp-ti-on Stan-dard\OT1/lmr/m/n/12 handelt sich um ein sym-me-tri-sches Ver-schl[]usselungsverfahren,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 13--22
+
+ []
+
+File: Bilder//htl-logo.jpg Graphic file (type jpg)
+<use Bilder//htl-logo.jpg>
+Package pdftex.def Info: Bilder//htl-logo.jpg  used on input line 24.
+(pdftex.def)             Requested size: 121.49869pt x 24.2094pt.
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 28.55943pt, for example:
+(fancyhdr)                \setlength{\headheight}{28.55943pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-16.55943pt}.
+
+[2] (C:\Users\fplun\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
 File: lstlang1.sty 2020/03/24 1.8d listings language file
 ) (C:\Users\fplun\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstmisc.sty
 File: lstmisc.sty 2020/03/24 1.8d (Carsten Heinz)
 ) (../../openssl/openssl-Programm/main.c
 File: Bilder//htl-logo.jpg Graphic file (type jpg)
 <use Bilder//htl-logo.jpg>
-Package pdftex.def Info: Bilder//htl-logo.jpg  used on input line 40.
+Package pdftex.def Info: Bilder//htl-logo.jpg  used on input line 45.
 (pdftex.def)             Requested size: 121.49869pt x 24.2094pt.
 
 
@@ -917,10 +941,10 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-16.55943pt}.
 
-[2]) (../../openssl/openssl-Programm/EVP.c
+[3]) (../../openssl/openssl-Programm/EVP.c
 File: Bilder//htl-logo.jpg Graphic file (type jpg)
 <use Bilder//htl-logo.jpg>
-Package pdftex.def Info: Bilder//htl-logo.jpg  used on input line 31.
+Package pdftex.def Info: Bilder//htl-logo.jpg  used on input line 36.
 (pdftex.def)             Requested size: 121.49869pt x 24.2094pt.
 
 
@@ -930,15 +954,15 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-16.55943pt}.
 
-[3])
+[4])
 
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 14.
+(hyperref)                than one, level fixed on input line 31.
 
-<Bilder//Programm-Output.png, id=174, 797.98125pt x 89.58469pt>
+<Bilder//Programm-Output.png, id=192, 797.98125pt x 89.58469pt>
 File: Bilder//Programm-Output.png Graphic file (type png)
 <use Bilder//Programm-Output.png>
-Package pdftex.def Info: Bilder//Programm-Output.png  used on input line 17.
+Package pdftex.def Info: Bilder//Programm-Output.png  used on input line 34.
 (pdftex.def)             Requested size: 500.484pt x 56.18712pt.
 ) 
 AED: lastpage setting LastPage
@@ -953,7 +977,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-16.55943pt}.
 
-[4 <c:/Users/fplun/GoogleDrive/Schule/2020_21/FSST/FSST_Lezuo/Programme/openssl/openssl-Latech/Bilder//Programm-Output.png>] (c:/Users\fplun\GoogleDrive\Schule\2020_21\FSST\FSST_Lezuo\Programme\openssl\openssl-Latech\FSST-openssl.aux)
+[5 <c:/Users/fplun/GoogleDrive/Schule/2020_21/FSST/FSST_Lezuo/Programme/openssl/openssl-Latech/Bilder//Programm-Output.png>] (c:/Users\fplun\GoogleDrive\Schule\2020_21\FSST\FSST_Lezuo\Programme\openssl\openssl-Latech\FSST-openssl.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
@@ -964,17 +988,17 @@ Package rerunfilecheck Info: File `FSST-openssl.out' has not changed.
 (rerunfilecheck)             Checksum: FC2A7BD17D9731FA393F918B9D819F4D;314.
  ) 
 Here is how much of TeX's memory you used:
- 35752 strings out of 479618
- 838527 string characters out of 2865027
- 1719149 words of memory out of 3000000
- 52131 multiletter control sequences out of 15000+200000
- 447851 words of font info for 59 fonts, out of 3000000 for 9000
+ 35762 strings out of 479618
+ 838627 string characters out of 2865027
+ 1756782 words of memory out of 3000000
+ 52135 multiletter control sequences out of 15000+200000
+ 451432 words of font info for 62 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 102i,17n,133p,1186b,2262s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Users/fplun/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}{C:/Users/fplun/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rmtt.enc}{C:/Users/fplun/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}<C:/Users/fplun/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/fplun/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/fplun/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/fplun/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtk10.pfb><C:/Users/fplun/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt10.pfb>
-Output written on c:/Users\fplun\GoogleDrive\Schule\2020_21\FSST\FSST_Lezuo\Programme\openssl\openssl-Latech\FSST-openssl.pdf (6 pages, 995779 bytes).
+ 102i,17n,133p,1186b,2260s stack positions out of 5000i,500n,10000p,200000b,50000s
+{C:/Users/fplun/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}{C:/Users/fplun/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}{C:/Users/fplun/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rmtt.enc}<C:/Users/fplun/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/fplun/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/fplun/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/fplun/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr7.pfb><C:/Users/fplun/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Users/fplun/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtk10.pfb><C:/Users/fplun/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt10.pfb>
+Output written on c:/Users\fplun\GoogleDrive\Schule\2020_21\FSST\FSST_Lezuo\Programme\openssl\openssl-Latech\FSST-openssl.pdf (7 pages, 1044144 bytes).
 PDF statistics:
- 237 PDF objects out of 1000 (max. 8388607)
- 119 named destinations out of 1000 (max. 500000)
+ 259 PDF objects out of 1000 (max. 8388607)
+ 122 named destinations out of 1000 (max. 500000)
  76 words of extra memory for PDF output out of 10000 (max. 10000000)
 

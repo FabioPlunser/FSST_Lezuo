@@ -2,9 +2,26 @@
 
 \section{Theorie}
 \subsection{OpenSSL}
+OpenSSL umfasst Implementierungen der Netzwerkprotokolle und verschiedener
+Verschlüsselungen sowie das Programm openssl für die Kommandozeile zum Beantragen, 
+Erzeugen und Verwalten von Zertifikaten. Die in C geschriebene Basisbibliothek stellt allgemeine 
+kryptographische Funktionen zum Ver- und Entschlüsseln sowie diverse weitere Werkzeuge bereit.
+\footnote{Quelle: \url{https://de.wikipedia.org/wiki/OpenSSL}}
+
 
 \subsection{AES}
+Beim \textbf{Advanced Encryption Standard}handelt sich um ein symmetrisches Verschlüsselungsverfahren, d. h. 
+der Schlüssel zum Ver- und Entschlüsseln ist identisch. Der Rijndael-Algorithmus besitzt variable, voneinander unabhängige Block- und 
+Schlüssellängen von 128, 160, 192, 224 oder 256 Bit. Rijndael bietet ein sehr hohes Maß an Sicherheit; erst mehr als zehn Jahre nach seiner 
+Standardisierung wurde der erste theoretisch interessante, praktisch aber nicht relevante Angriff gefunden.
+\\
+\\
+AES schränkt die Blocklänge auf 128 Bit und die Wahl der Schlüssellänge auf 128, 192 oder 256 Bit ein. Die Bezeichnungen der
+drei AES-Varianten AES-128, AES-192 und AES-256 beziehen sich jeweils auf die gewählte Schlüssellänge. AES ist frei verfügbar 
+und darf ohne Lizenzgebühren eingesetzt sowie in Soft- und Hardware implementiert werden.\footnote{Quelle: \url{https://de.wikipedia.org/wiki/Advanced_Encryption_Standard}}
 
+
+\newpage
 \section{Programm}
 
 \lstinputlisting[language=C, style=StyleC, caption=main.c, captionpos=b, label=main.c]{../../openssl/openssl-Programm/main.c}
