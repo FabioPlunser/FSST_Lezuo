@@ -60,7 +60,7 @@ int do_encrypt(unsigned char *plaintext, int plaintext_len, unsigned char *key, 
      * IV size for *most* modes is the same as the block size. For AES this
      * is 128 bits
      */
-    if(1 != EVP_EncryptInit_ex(ctx, EVP_aes_256_cbc(), NULL, key, iv)) Error_handling();
+    if(1 != EVP_EncryptInit_ex(ctx, EVP_aes_128_cbc(), NULL, key, iv)) Error_handling();
 
     /*
      * Provide the message to be encrypted, and obtain the encrypted output.
