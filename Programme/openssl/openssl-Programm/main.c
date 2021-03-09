@@ -1,5 +1,5 @@
 // Author: FabioPlunser //
-// Date: 17.2.2020 //
+// Date: 17.2.2021 - 8.03.2021 //
 // GIT-Repo: https://github.com/FabioPlunser/FSST_Lezuo
 // Specific Git-location: https://github.com/FabioPlunser/FSST_Lezuo/tree/main/Programme/openssl/openssl-Programm //
 // Compiled with make, in WSL using Ubuntu 20.0.4, as you can see in my Repo //
@@ -15,119 +15,51 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/types.h>
+#include <fcntl.h>
 
 #include <openssl/aes.h>
 #include <openssl/evp.h>
 #include <openssl/err.h>
+#include <sys/stat.h> 
 
 
+#if defined(__linux__)
 
-void Error_handling(void)
-{
-    ERR_print_errors_fp(stderr);
-    abort();
-}
+int input_plaintext_from_file(char *source, unsigned char *key, unsigned char *iv, unsigned char *plaintext, unsigned char *ciphertext);
+int input_ciphertext_from_file(char *source, unsigned char *key, unsigned char *iv, unsigned char *plaintext, unsigned char *ciphertext);
 
-int do_decrypt(char *ciphertext, int ciphertext_len, char *key, char *iv, char* plaintext)
-{
-    EVP_CIPHER_CTX *ctx;
-    int len;
-    int plaintext_len;
-    
-    if(!(ctx = EVP_CIPHER_CTX_new())) Error_handling();
-    
-    EVP_CIPHER_CTX_set_padding(ctx, 0);
-    
-    if(1 != EVP_DecryptInit_ex(ctx, EVP_aes_128_cbc(), NULL, key, iv)) Error_handling();
-
-    if(1 != EVP_DecryptUpdate(ctx, plaintext, &len, ciphertext, ciphertext_len)) Error_handling();
-    plaintext_len = len;
-
-    if(1 != EVP_DecryptFinal_ex(ctx, plaintext+len, &len)) Error_handling();
-    plaintext_len += len;
-
-    ERR_print_errors_fp(stderr);
-    EVP_CIPHER_CTX_cleanup(ctx);
-    return plaintext_len;
-}
-
-int do_encrypt(unsigned char *plaintext, int plaintext_len, unsigned char *key, unsigned char *iv, unsigned char *ciphertext)
-{
-    EVP_CIPHER_CTX *ctx;
-
-    int len;
-
-    int ciphertext_len;
-    if(!(ctx = EVP_CIPHER_CTX_new())) Error_handling();
-
-    if(1 != EVP_EncryptInit_ex(ctx, EVP_aes_128_cbc(), NULL, key, iv)) Error_handling();
-
-    if(1 != EVP_EncryptUpdate(ctx, ciphertext, &len, plaintext, plaintext_len)) Error_handling();
-    ciphertext_len = len;
-
-    if(1 != EVP_EncryptFinal_ex(ctx, ciphertext + len, &len)) Error_handling();
-    ciphertext_len += len;
-    
-    EVP_CIPHER_CTX_free(ctx);
-
-    return ciphertext_len;
-}
-
-int diyencryption (unsigned char* key, unsigned char* iv, unsigned char* plaintext, int plaintext_len, unsigned char* ciphertext)
-{
-    int ciphertext_len;
-    ciphertext_len = do_encrypt(plaintext, strlen(plaintext), key, iv, ciphertext);
-    return ciphertext_len;
-}
-
-int diydecryption(unsigned char* key, unsigned char* iv, unsigned char* plaintext, unsigned char *ciphertext)
-{
-    char temp[2];   
-    unsigned char *hex = malloc(sizeof(unsigned char)*128);
-    int x = 0;
-    for(int i=0; i<strlen(ciphertext); i++)
-    {
-        temp[0] = ciphertext[i];
-        temp[1] = ciphertext[++i];
-        temp[2] = '\0';
-        hex[x] = (unsigned int)strtol(temp, NULL, 16);
-        x++;
-    }
-   
-    int ciphertext_len = strlen(hex);
-    int decryptedtext_len;
-    decryptedtext_len = do_decrypt(hex, ciphertext_len, key, iv, plaintext);
-    plaintext[decryptedtext_len] = '\0'; 
-
-}
 int main()
-{   
-    unsigned char* key = malloc(16); 
-    unsigned char* iv = malloc(16);
+{
+    unsigned char *key = malloc(16);
+    unsigned char *iv = malloc(16);
     unsigned char ciphertext[128];
     unsigned char plaintext[128];
+    unsigned char path_plaintext[1000];
+    unsigned char path_ciphertext[1000];
     int choose;
-    printf("AES-128, encrypt und decrypt\n\n");
-    printf("1 für encrypt\n2 für decrypt\n3 encrypt Text aus Datei\n4 decrypt Hexzahl aus datei\n5 schließen\n\nEingabe:");
+    printf("\033[1m\033[32m");
+    printf("\n \e[4mWillkommen zu AES-128, encrypt und decrypt\e\n\n");
+    printf("\033[0m");
+    printf("1 für encrypt\n2 für decrypt\n3 Encrypt eines Plaintextes aus einer txt datei\n4 Decrypt eines Cipthertextes aus einer txt Datei\n5 schließen\n\nEingabe:");
     scanf("%i", &choose);
-    
-    if(choose == 1)
+
+    if (choose == 1)
     {
         printf("Key: ");
+        //scanf("%[^\n]", key);
         scanf("%s", key);
-
         printf("IV: ");
         scanf("%s", iv);
-
-        printf("Text der zu encrypten ist: ");
-        scanf("%s", plaintext);
-        printf("\n\n");
-
+        printf("Text der zu verschluesseln ist: ");
+        scanf(" %[^\n]", plaintext); //%%[^\n]
+        printf("\n");
         int plaintext_len = strlen(plaintext);
         int ciphertext_len = diyencryption(key, iv, plaintext, plaintext_len, ciphertext);
-        printf("Enryption ergebniss: \n");
+        printf("\033[1m\033[32m");
+        printf("Verschluesselung: \n");
+        printf("\033[0m");
         printf("\033[0;31m");
-        for(int i=0; i<ciphertext_len; i++)
+        for (int i = 0; i < ciphertext_len; i++)
         {
             printf("%02X", ciphertext[i]);
         }
@@ -135,7 +67,7 @@ int main()
         printf("\n");
         main();
     }
-    else if(choose == 2)
+    else if (choose == 2)
     {
         printf("Key: ");
         scanf("%s", key);
@@ -143,12 +75,12 @@ int main()
         printf("IV: ");
         scanf("%s", iv);
 
-        printf("Ciphertext: ");
+        printf("Zu entschluesselnder Text in \033[0;31m HEX \033[0m");
         scanf("%s", ciphertext);
-        
+
         diydecryption(key, iv, plaintext, ciphertext);
-        
-        printf("EVP: Decrypted test is: ");
+
+        printf("Entschuesellung: ");
         printf("\033[0;31m");
         printf("%s", plaintext);
         printf("\033[0m");
@@ -156,19 +88,74 @@ int main()
 
         main();
     }
-    else if(choose == 5)
+    else if (choose == 3)
+    {
+        printf("Key: ");
+        scanf("%s", key);
+
+        printf("IV: ");
+        scanf("%s", iv);
+
+        printf("Path zur \033[0;31m txt \033[0m Datei wo der Plaintext drinnen steht: ");
+        scanf("%s", path_plaintext);
+        printf("\n\n");
+
+        int ciphertext_len = input_plaintext_from_file(path_plaintext, key, iv, plaintext, ciphertext);
+        printf("Verschluesselung: \n");
+        printf("\033[0;31m");
+        for (int i = 0; i < ciphertext_len; i++)
+        {
+            printf("%02X", ciphertext[i]);
+        }
+        printf("\033[0m");
+        printf("\n");
+        main();
+    }
+    else if (choose == 4)
+    {
+        printf("Key: ");
+        scanf("%s", key);
+
+        printf("IV: ");
+        scanf("%s", iv);
+
+        printf("Path zur \033[0;31m txt \033[0m Datei wo der Ciphertext drinnen steht: ");
+        scanf("%s", path_ciphertext);
+        printf("\n\n");
+
+        printf("Path Ciphertext: %s\n", path_ciphertext);
+       
+        input_ciphertext_from_file(path_ciphertext, key, iv, plaintext, ciphertext);
+        printf("Entschuesellung: ");
+        printf("\033[0;31m");
+        printf("%s", plaintext);
+        printf("\033[0m");
+        printf("\n\n");
+        main();
+    }
+    else if (choose == 5)
     {
         printf("\033[0;31m");
         printf("Wird geschlossen\n\n");
         printf("\033[0m");
-        return 0;
+        
+        main();
     }
     else
     {
         printf("\033[0;31m");
         printf("Es wurde keine mögliche Aktion ausgewählt\n\n");
         printf("\033[0m");
-        return 0;
+        
+        main();
     }
 }
-    
+#endif
+
+#if defined(_WIN64) || defined(_WIN32)
+
+int main()
+{
+    printf("Only for Linux Use")
+}
+#endif

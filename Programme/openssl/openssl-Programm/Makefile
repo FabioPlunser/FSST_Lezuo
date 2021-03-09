@@ -1,5 +1,5 @@
 main: main.c
-	gcc main.c -lcrypto -o main
+	gcc main.c Encryption.c FileInput.c -lcrypto -o main
 
 
 

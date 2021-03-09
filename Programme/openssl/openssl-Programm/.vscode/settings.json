@@ -2,6 +2,8 @@
     "files.associations": {
         "ssl.h": "c",
         "err.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "fcntl.h": "c",
+        "typeinfo": "c"
     }
 }
