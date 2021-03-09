@@ -28,6 +28,8 @@
 int input_plaintext_from_file(char *source, unsigned char *key, unsigned char *iv, unsigned char *plaintext, unsigned char *ciphertext);
 int input_ciphertext_from_file(char *source, unsigned char *key, unsigned char *iv, unsigned char *plaintext, unsigned char *ciphertext);
 
+
+
 int main()
 {
     unsigned char *key = malloc(16);
@@ -40,7 +42,7 @@ int main()
     printf("\033[1m\033[32m");
     printf("\n \e[4mWillkommen zu AES-128, encrypt und decrypt\e\n\n");
     printf("\033[0m");
-    printf("1 für encrypt\n2 für decrypt\n3 Encrypt eines Plaintextes aus einer txt datei\n4 Decrypt eines Cipthertextes aus einer txt Datei\n5 schließen\n\nEingabe:");
+    printf("1 fuer encrypt\n2 fuer decrypt\n3 Encrypt eines Plaintextes aus einer txt datei\n4 Decrypt eines Cipthertextes aus einer txt Datei\n5 schliessen\n\nEingabe:");
     scanf("%i", &choose);
 
     if (choose == 1)
@@ -144,7 +146,7 @@ int main()
     else
     {
         printf("\033[0;31m");
-        printf("Es wurde keine mögliche Aktion ausgewählt\n\n");
+        printf("Es wurde keine moegliche Aktion ausgewaehlt\n\n");
         printf("\033[0m");
         
         main();
